@@ -34,7 +34,7 @@
         <div class="header__main container pb-2">
             <div class="d-flex justify-content-between align-items-center">
                 <div class="col-auto">
-                    <a><img src="~/images/logo_lc_default.png" /></a>
+                    <a href="@Url.Action("Index", "Home")"><img src="~/images/logo_lc_default.png" /></a>
                 </div>
                 <div class="col-auto">
                     <div class="input-field">
@@ -47,7 +47,7 @@
                 <div class="col-auto">
                     <ul class="d-flex align-items-center">
                         <li class="login-button">
-                            <a href="#" style="color: white;">
+                            <a href="@Url.Action("Account", "Home")" style="color: white;">
                                 <i class="fa-solid fa-user me-1" style="color: #ffffff;"></i>
                                 Đăng nhập
                             </a>
