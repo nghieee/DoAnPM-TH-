@@ -18,8 +18,13 @@ namespace DoAnPM_TH_.Controllers
             return View();
         }
 
-        public IActionResult Privacy()
+        public IActionResult Account()
         {
+            return View();
+        }
+
+        public IActionResult Doctor() 
+        { 
             return View();
         }
 

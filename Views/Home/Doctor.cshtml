@@ -1,0 +1,262 @@
+﻿@{
+}
+
+<style>
+    p {
+        margin: 0;
+    }
+
+    img {
+        width: 100%;
+        height: auto;
+    }
+
+    .doctor__top {
+        background-image: url('../images/bg_doctor.png');
+        
+    }
+
+    .top-featured .icon {
+        height: 48px;
+        width: 48px;
+        margin-right: 12px;
+    }
+
+    .doctor__list .doctor__list-row {
+        display: none;
+    }
+
+    .doctor__list .doctor__list-row:nth-child(2) {
+        display: flex;
+    }
+
+    .doctor__list .doctor-img {
+        width: 120px;
+        height: 120px;
+        border-radius: 9999px;
+    }
+
+</style>
+
+<div class="doctor__top pt-4 pb-5">
+    <div class="container">
+        <nav style="--bs-breadcrumb-divider: url(&#34;data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='8' height='8'%3E%3Cpath d='M2.5 0L1 1.5 3.5 4 1 6.5 2.5 8l4-4-4-4z' fill='%236c757d'/%3E%3C/svg%3E&#34;);" aria-label="breadcrumb">
+            <ol class="breadcrumb font-14">
+                <li class="breadcrumb-item"><a href="@Url.Action("Index", "Home")">Trang Chủ</a></li>
+                <li class="breadcrumb-item activetext-black" aria-current="page">Đội ngũ chuyên môn</li>
+            </ol>
+        </nav>
+    </div>
+    <img src="~/images/banner_doctors.png" />
+    <div class="top-featured container d-flex mt-4">
+        <div class="d-flex">
+            <img src="~/images/icon_doctor.png" class="icon" />
+            <div>
+                <p class="fw-500">Giàu kinh nghiệm</p>
+                <p class="opacity-75">Đội ngũ bác sĩ và dược sĩ giàu kinh nghiệm có thâm niên trong ngành, được tu nghiệp cả trong và ngoài nước.</p>
+            </div>
+        </div>
+        <div class="d-flex">
+            <img src="~/images/icon_doctor2.png" class="icon" />
+            <div class="content text-body">
+                <p class="fw-500">Nghiệp vụ chuyên môn cao</p>
+                <p class="opacity-75">Các bác sĩ và dược sĩ hiện đang công tác và giảng dạy tại bệnh viện hàng đầu cả nước, nghiệp vụ chuyên môn cao ở lĩnh vực y dược.</p>
+            </div>
+        </div>
+        <div class="d-flex">
+            <img src="~/images/icon_doctor3.png" class="icon"/>
+            <div class="content text-body">
+                <p class="fw-500">Tâm huyết và tận tâm</p>
+                <p class="opacity-75">Luôn sẵn sàng tư vấn và hỗ trợ chăm sóc sức khỏe cho mọi người bằng sự tận tâm và nhiệt huyết.</p>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="doctor__list container mt-4 mb-5">
+    <p class="border-4 border-start border-primary font-16 fw-500 ps-2">Đội ngũ chuyên môn</p>
+    <div class="doctor__list-row row-cols-3 pb-4 pt-4 border-1 border-bottom border-dark-subtitle">
+        <div class="col">
+            <a class="d-flex text-black">
+                <img src="~/images/doctor_image.png" class="doctor-img" />
+                <div class="ms-2">
+                    <p class="fw-500 opacity-75">Bác sĩ</p>
+                    <h4>Nguyễn Văn My</h4>
+                    <p class="fw-500 opacity-50">Truyền nhiễm</p>
+                </div>
+            </a>
+        </div>
+        <div class="col">
+            <a class="d-flex text-black">
+                <img src="~/images/doctor_image.png" class="doctor-img" />
+                <div class="ms-2">
+                    <p class="fw-500 opacity-75">Bác sĩ</p>
+                    <h4>Nguyễn Văn My</h4>
+                    <p class="fw-500 opacity-50">Truyền nhiễm</p>
+                </div>
+            </a>
+        </div>
+        <div class="col">
+            <a class="d-flex text-black">
+                <img src="~/images/doctor_image.png" class="doctor-img" />
+                <div class="ms-2">
+                    <p class="fw-500 opacity-75">Bác sĩ</p>
+                    <h4>Nguyễn Văn My</h4>
+                    <p class="fw-500 opacity-50">Truyền nhiễm</p>
+                </div>
+            </a>
+        </div>
+    </div>
+    <div class="doctor__list-row row row-cols-3 pb-4 pt-4 border-1 border-bottom border-dark-subtitle">
+        <div class="col">
+            <a class="d-flex text-black">
+                <img src="~/images/doctor_image.png" class="doctor-img" />
+                <div class="ms-2">
+                    <p class="fw-500 opacity-75">Bác sĩ</p>
+                    <h4>Nguyễn Văn My</h4>
+                    <p class="fw-500 opacity-50">Truyền nhiễm</p>
+                </div>
+            </a>
+        </div>
+        <div class="col">
+            <a class="d-flex text-black">
+                <img src="~/images/doctor_image.png" class="doctor-img" />
+                <div class="ms-2">
+                    <p class="fw-500 opacity-75">Bác sĩ</p>
+                    <h4>Nguyễn Văn My</h4>
+                    <p class="fw-500 opacity-50">Truyền nhiễm</p>
+                </div>
+            </a>
+        </div>
+        <div class="col">
+            <a class="d-flex text-black">
+                <img src="~/images/doctor_image.png" class="doctor-img" />
+                <div class="ms-2">
+                    <p class="fw-500 opacity-75">Bác sĩ</p>
+                    <h4>Nguyễn Văn My</h4>
+                    <p class="fw-500 opacity-50">Truyền nhiễm</p>
+                </div>
+            </a>
+        </div>
+    </div>
+    <div class="doctor__list-row row row-cols-3 pb-4 pt-4 border-1 border-bottom border-dark-subtitle">
+        <div class="col">
+            <a class="d-flex text-black">
+                <img src="~/images/doctor_image.png" class="doctor-img" />
+                <div class="ms-2">
+                    <p class="fw-500 opacity-75">Bác sĩ</p>
+                    <h4>Nguyễn Văn My</h4>
+                    <p class="fw-500 opacity-50">Truyền nhiễm</p>
+                </div>
+            </a>
+        </div>
+        <div class="col">
+            <a class="d-flex text-black">
+                <img src="~/images/doctor_image.png" class="doctor-img" />
+                <div class="ms-2">
+                    <p class="fw-500 opacity-75">Bác sĩ</p>
+                    <h4>Nguyễn Văn My</h4>
+                    <p class="fw-500 opacity-50">Truyền nhiễm</p>
+                </div>
+            </a>
+        </div>
+        <div class="col">
+            <a class="d-flex text-black">
+                <img src="~/images/doctor_image.png" class="doctor-img" />
+                <div class="ms-2">
+                    <p class="fw-500 opacity-75">Bác sĩ</p>
+                    <h4>Nguyễn Văn My</h4>
+                    <p class="fw-500 opacity-50">Truyền nhiễm</p>
+                </div>
+            </a>
+        </div>
+    </div>
+    <div class="doctor__list-row row row-cols-3 pb-4 pt-4 border-1 border-bottom border-dark-subtitle">
+        <div class="col">
+            <a class="d-flex text-black">
+                <img src="~/images/doctor_image.png" class="doctor-img" />
+                <div class="ms-2">
+                    <p class="fw-500 opacity-75">Bác sĩ</p>
+                    <h4>Nguyễn Văn My</h4>
+                    <p class="fw-500 opacity-50">Truyền nhiễm</p>
+                </div>
+            </a>
+        </div>
+        <div class="col">
+            <a class="d-flex text-black">
+                <img src="~/images/doctor_image.png" class="doctor-img" />
+                <div class="ms-2">
+                    <p class="fw-500 opacity-75">Bác sĩ</p>
+                    <h4>Nguyễn Văn My</h4>
+                    <p class="fw-500 opacity-50">Truyền nhiễm</p>
+                </div>
+            </a>
+        </div>
+        <div class="col">
+            <a class="d-flex text-black">
+                <img src="~/images/doctor_image.png" class="doctor-img" />
+                <div class="ms-2">
+                    <p class="fw-500 opacity-75">Bác sĩ</p>
+                    <h4>Nguyễn Văn My</h4>
+                    <p class="fw-500 opacity-50">Truyền nhiễm</p>
+                </div>
+            </a>
+        </div>
+    </div>
+    <div class="doctor__list-row row row-cols-3 pb-4 pt-4">
+        <div class="col">
+            <a class="d-flex text-black">
+                <img src="~/images/doctor_image.png" class="doctor-img" />
+                <div class="ms-2">
+                    <p class="fw-500 opacity-75">Bác sĩ</p>
+                    <h4>Nguyễn Văn My</h4>
+                    <p class="fw-500 opacity-50">Truyền nhiễm</p>
+                </div>
+            </a>
+        </div>
+        <div class="col">
+            <a class="d-flex text-black">
+                <img src="~/images/doctor_image.png" class="doctor-img" />
+                <div class="ms-2">
+                    <p class="fw-500 opacity-75">Bác sĩ</p>
+                    <h4>Nguyễn Văn My</h4>
+                    <p class="fw-500 opacity-50">Truyền nhiễm</p>
+                </div>
+            </a>
+        </div>
+        <div class="col">
+            <a class="d-flex text-black">
+                <img src="~/images/doctor_image.png" class="doctor-img" />
+                <div class="ms-2">
+                    <p class="fw-500 opacity-75">Bác sĩ</p>
+                    <h4>Nguyễn Văn My</h4>
+                    <p class="fw-500 opacity-50">Truyền nhiễm</p>
+                </div>
+            </a>
+        </div>
+    </div>
+    
+    <div class="text-center mt-4">
+        <a id="showMoreBtn" style="cursor: pointer;">
+            <i class="fa-solid fa-angles-down pe-2"></i>
+            Xem thêm
+        </a>
+    </div>
+</div>
+
+<script>
+    document.getElementById('showMoreBtn').addEventListener('click', function () {
+    var rows = document.querySelectorAll('.doctor__list .doctor__list-row');
+    var visibleRows = document.querySelectorAll('.doctor__list .doctor__list-row[style="display: flex;"]').length;
+    var rowsToShow = visibleRows + 2;
+
+    for (var i = visibleRows; i < rowsToShow && i < rows.length; i++) {
+        rows[i].style.display = 'flex';
+    }
+
+    if (rowsToShow >= rows.length) {
+        document.getElementById('showMoreBtn').style.display = 'none';
+    }
+    });
+
+
+</script>
