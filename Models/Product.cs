@@ -9,11 +9,9 @@ public partial class Product
 
     public string? ProName { get; set; }
 
-    public double? OldPrice { get; set; }
+    public double? Price { get; set; }
 
-    public double? NewPrice { get; set; }
-
-    public int? UnitPrice { get; set; }
+    public string? Unit { get; set; }
 
     public string? Descript { get; set; }
 

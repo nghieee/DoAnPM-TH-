@@ -152,7 +152,12 @@ public partial class LongChauStoreContext : DbContext
         {
             entity.HasKey(e => e.ProId).HasName("PK__Product__620295F07D4C4D6C");
 
-            entity.ToTable("Product");
+            entity.ToTable("Product", tb =>
+                {
+                    tb.HasTrigger("trg_UpdateProductCountOnDelete");
+                    tb.HasTrigger("trg_UpdateProductCountOnInsert");
+                    tb.HasTrigger("trg_UpdateProductCountOnUpdate");
+                });
 
             entity.Property(e => e.ProId)
                 .HasMaxLength(8)
@@ -179,6 +184,7 @@ public partial class LongChauStoreContext : DbContext
             entity.Property(e => e.ProName).HasMaxLength(255);
             entity.Property(e => e.Rating).HasColumnName("rating");
             entity.Property(e => e.Status).HasMaxLength(8);
+            entity.Property(e => e.Unit).HasMaxLength(25);
 
             entity.HasOne(d => d.Brand).WithMany(p => p.Products)
                 .HasForeignKey(d => d.BrandId)

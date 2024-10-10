@@ -1,6 +1,7 @@
 ﻿@{
     ViewData["Title"] = "Home Page";
 }
+@model DoAnPM_TH_.ViewModels.HomeViewModel
 
 <style>
     .rounded-12 {
@@ -89,164 +90,22 @@
     </div>
     <div class="main__feature-cate">
         <div class="row">
-            <div class="col-2">
-                <a class="card card-body align-items-center rounded-12">
-                    <img src="~/images/than_kinh_nao.png" />
-                    <div class="text-center mt-2">
-                        <div class="fw-500">
-                            Thần kinh não
+            @foreach (var category in Model.Categories)
+            {
+                <div class="col-2 pt-3">
+                    <a class="card card-body align-items-center rounded-12 justify-content-center" style="height: 126px;">
+                        <img src="@Url.Content("~/images/CategoryImages/" + category.CateImg)" />
+                        <div class="text-center mt-2">
+                            <div class="fw-500 font-14">
+                                @category.CateName
+                            </div>
+                            <div class="opacity-50 font-14">
+                                @category.CateProductCount sản phẩm
+                            </div>
                         </div>
-                        <div class="opacity-50 font-14">
-                            106 sản phẩm
-                        </div>
-                    </div>
-                </a>
-            </div>
-            <div class="col-2">
-                <a class="card card-body align-items-center rounded-12">
-                    <img src="~/images/than_kinh_nao.png" />
-                    <div class="text-center mt-2">
-                        <div class="fw-500">
-                            Thần kinh não
-                        </div>
-                        <div class="opacity-50 font-14">
-                            106 sản phẩm
-                        </div>
-                    </div>
-                </a>
-            </div>
-            <div class="col-2">
-                <a class="card card-body align-items-center rounded-12">
-                    <img src="~/images/than_kinh_nao.png" />
-                    <div class="text-center mt-2">
-                        <div class="fw-500">
-                            Thần kinh não
-                        </div>
-                        <div class="opacity-50 font-14">
-                            106 sản phẩm
-                        </div>
-                    </div>
-                </a>
-            </div>
-            <div class="col-2">
-                <a class="card card-body align-items-center rounded-12">
-                    <img src="~/images/than_kinh_nao.png" />
-                    <div class="text-center mt-2">
-                        <div class="fw-500">
-                            Thần kinh não
-                        </div>
-                        <div class="opacity-50 font-14">
-                            106 sản phẩm
-                        </div>
-                    </div>
-                </a>
-            </div>
-            <div class="col-2">
-                <a class="card card-body align-items-center rounded-12">
-                    <img src="~/images/than_kinh_nao.png" />
-                    <div class="text-center mt-2">
-                        <div class="fw-500">
-                            Thần kinh não
-                        </div>
-                        <div class="opacity-50 font-14">
-                            106 sản phẩm
-                        </div>
-                    </div>
-                </a>
-            </div>
-            <div class="col-2">
-                <a class="card card-body align-items-center rounded-12">
-                    <img src="~/images/than_kinh_nao.png" />
-                    <div class="text-center mt-2">
-                        <div class="fw-500">
-                            Thần kinh não
-                        </div>
-                        <div class="opacity-50 font-14">
-                            106 sản phẩm
-                        </div>
-                    </div>
-                </a>
-            </div>
-        </div>
-        <div class="row mt-3">
-            <div class="col-2">
-                <a class="card card-body align-items-center rounded-12">
-                    <img src="~/images/than_kinh_nao.png" />
-                    <div class="text-center mt-2">
-                        <div class="fw-500">
-                            Thần kinh não
-                        </div>
-                        <div class="opacity-50 font-14">
-                            106 sản phẩm
-                        </div>
-                    </div>
-                </a>
-            </div>
-            <div class="col-2">
-                <a class="card card-body align-items-center rounded-12">
-                    <img src="~/images/than_kinh_nao.png" />
-                    <div class="text-center mt-2">
-                        <div class="fw-500">
-                            Thần kinh não
-                        </div>
-                        <div class="opacity-50 font-14">
-                            106 sản phẩm
-                        </div>
-                    </div>
-                </a>
-            </div>
-            <div class="col-2">
-                <a class="card card-body align-items-center rounded-12">
-                    <img src="~/images/than_kinh_nao.png" />
-                    <div class="text-center mt-2">
-                        <div class="fw-500">
-                            Thần kinh não
-                        </div>
-                        <div class="opacity-50 font-14">
-                            106 sản phẩm
-                        </div>
-                    </div>
-                </a>
-            </div>
-            <div class="col-2">
-                <a class="card card-body align-items-center rounded-12">
-                    <img src="~/images/than_kinh_nao.png" />
-                    <div class="text-center mt-2">
-                        <div class="fw-500">
-                            Thần kinh não
-                        </div>
-                        <div class="opacity-50 font-14">
-                            106 sản phẩm
-                        </div>
-                    </div>
-                </a>
-            </div>
-            <div class="col-2">
-                <a class="card card-body align-items-center rounded-12">
-                    <img src="~/images/than_kinh_nao.png" />
-                    <div class="text-center mt-2">
-                        <div class="fw-500">
-                            Thần kinh não
-                        </div>
-                        <div class="opacity-50 font-14">
-                            106 sản phẩm
-                        </div>
-                    </div>
-                </a>
-            </div>
-            <div class="col-2">
-                <a class="card card-body align-items-center rounded-12">
-                    <img src="~/images/than_kinh_nao.png" />
-                    <div class="text-center mt-2">
-                        <div class="fw-500">
-                            Thần kinh não
-                        </div>
-                        <div class="opacity-50 font-14">
-                            106 sản phẩm
-                        </div>
-                    </div>
-                </a>
-            </div>
+                    </a>
+                </div>
+            }
         </div>
     </div>
 </div>
@@ -259,234 +118,32 @@
             </div>
         </div>
         <div class="row row-cols-1 row-cols-md-6 g-4 mb-3 mt-1">
-            <div class="col">
-                <div class="card">
-                    <img src="~/images/sanpham.png" class="card-img-top product-img" alt=""/>
-                    <div class="card-body">
-                        <h5 class="card-title product-title font-14">Viên uống Glucosamine And Chondroitin Jpanwell hỗ trợ bổ sung chất nhờn dịch khớp (120 viên)</h5>
-                    </div>
-                    <div class="px-3">
-                        <div class="mb-1">
-                            <div class="font-14 text-blue">
-                                <span class="">768.000đ</span>
-                                <span class=""> / Hộp</span>
-                            </div>
+            @foreach (var product in Model.Products.Take(8))
+            {
+                <div class="col">
+                    <div class="card">
+                        <img src="@Url.Content("~/images/ProductImages/" + product.ProImg)" class="card-img-top product-img" alt="Product Image" />
+                        <div class="card-body">
+                            <h5 class="card-title product-title font-14">@product.ProName</h5>
                         </div>
-                        <div class="font-14 opacity-50 mb-2 text-decoration-line-through">960.000đ</div>
-                        <p class="px-2 py-1 bg-secondary text-white rounded-3 w-fit font-12 opacity-50">Hộp 120 Viên</p>
-                        <button type="button" class="btn btn-primary rounded-pill w-100 mb-3">Chọn mua</button>
+                        <div class="px-3">
+                            <div class="mb-1">
+                                <div class="font-14 text-blue">
+                                    <span>@($"{product.Price:N0}đ")</span>
+                                    <span class=""> / Hộp</span>
+                                </div>
+                            </div>
+                            <button type="button" class="add-to-cart btn btn-primary rounded-pill w-100 mb-3"
+                                    data-id="@product.ProId"
+                                    data-name="@product.ProName"
+                                    data-price="@product.Price"
+                                    data-img="@Url.Content("~/images/ProductImages/" + product.ProImg)">
+                                Chọn mua
+                            </button>
+                        </div>
                     </div>
                 </div>
-            </div>
-            <div class="col">
-                <div class="card">
-                    <img src="~/images/sanpham.png" class="card-img-top product-img" alt="" />
-                    <div class="card-body">
-                        <h5 class="card-title product-title font-14">Viên uống Glucosamine And Chondroitin Jpanwell hỗ trợ bổ sung chất nhờn dịch khớp (120 viên)</h5>
-                    </div>
-                    <div class="px-3">
-                        <div class="mb-1">
-                            <div class="font-14 text-blue">
-                                <span class="">768.000đ</span>
-                                <span class=""> / Hộp</span>
-                            </div>
-                        </div>
-                        <div class="font-14 opacity-50 mb-2 text-decoration-line-through">960.000đ</div>
-                        <p class="px-2 py-1 bg-secondary text-white rounded-3 w-fit font-12 opacity-50">Hộp 120 Viên</p>
-                        <button type="button" class="btn btn-primary rounded-pill w-100 mb-3">Chọn mua</button>
-                    </div>
-                </div>
-            </div>
-            <div class="col">
-                <div class="card">
-                    <img src="~/images/sanpham.png" class="card-img-top product-img" alt="" />
-                    <div class="card-body">
-                        <h5 class="card-title product-title font-14">Viên uống Glucosamine And Chondroitin Jpanwell hỗ trợ bổ sung chất nhờn dịch khớp (120 viên)</h5>
-                    </div>
-                    <div class="px-3">
-                        <div class="mb-1">
-                            <div class="font-14 text-blue">
-                                <span class="">768.000đ</span>
-                                <span class=""> / Hộp</span>
-                            </div>
-                        </div>
-                        <div class="font-14 opacity-50 mb-2 text-decoration-line-through">960.000đ</div>
-                        <p class="px-2 py-1 bg-secondary text-white rounded-3 w-fit font-12 opacity-50">Hộp 120 Viên</p>
-                        <button type="button" class="btn btn-primary rounded-pill w-100 mb-3">Chọn mua</button>
-                    </div>
-                </div>
-            </div>
-            <div class="col">
-                <div class="card">
-                    <img src="~/images/sanpham.png" class="card-img-top product-img" alt="" />
-                    <div class="card-body">
-                        <h5 class="card-title product-title font-14">Viên uống Glucosamine And Chondroitin Jpanwell hỗ trợ bổ sung chất nhờn dịch khớp (120 viên)</h5>
-                    </div>
-                    <div class="px-3">
-                        <div class="mb-1">
-                            <div class="font-14 text-blue">
-                                <span class="">768.000đ</span>
-                                <span class=""> / Hộp</span>
-                            </div>
-                        </div>
-                        <div class="font-14 opacity-50 mb-2 text-decoration-line-through">960.000đ</div>
-                        <p class="px-2 py-1 bg-secondary text-white rounded-3 w-fit font-12 opacity-50">Hộp 120 Viên</p>
-                        <button type="button" class="btn btn-primary rounded-pill w-100 mb-3">Chọn mua</button>
-                    </div>
-                </div>
-            </div>
-            <div class="col">
-                <div class="card">
-                    <img src="~/images/sanpham.png" class="card-img-top product-img" alt=""/>
-                    <div class="card-body">
-                        <h5 class="card-title product-title font-14">Viên uống Glucosamine And Chondroitin Jpanwell hỗ trợ bổ sung chất nhờn dịch khớp (120 viên)</h5>
-                    </div>
-                    <div class="px-3">
-                        <div class="mb-1">
-                            <div class="font-14 text-blue">
-                                <span class="">768.000đ</span>
-                                <span class=""> / Hộp</span>
-                            </div>
-                        </div>
-                        <div class="font-14 opacity-50 mb-2 text-decoration-line-through">960.000đ</div>
-                        <p class="px-2 py-1 bg-secondary text-white rounded-3 w-fit font-12 opacity-50">Hộp 120 Viên</p>
-                        <button type="button" class="btn btn-primary rounded-pill w-100 mb-3">Chọn mua</button>
-                    </div>
-                </div>
-            </div>
-            <div class="col">
-                <div class="card">
-                    <img src="~/images/sanpham.png" class="card-img-top product-img" alt="" />
-                    <div class="card-body">
-                        <h5 class="card-title product-title font-14">Viên uống Glucosamine And Chondroitin Jpanwell hỗ trợ bổ sung chất nhờn dịch khớp (120 viên)</h5>
-                    </div>
-                    <div class="px-3">
-                        <div class="mb-1">
-                            <div class="font-14 text-blue">
-                                <span class="">768.000đ</span>
-                                <span class=""> / Hộp</span>
-                            </div>
-                        </div>
-                        <div class="font-14 opacity-50 mb-2 text-decoration-line-through">960.000đ</div>
-                        <p class="px-2 py-1 bg-secondary text-white rounded-3 w-fit font-12 opacity-50">Hộp 120 Viên</p>
-                        <button type="button" class="btn btn-primary rounded-pill w-100 mb-3">Chọn mua</button>
-                    </div>
-                </div>
-            </div>
-            <div class="col">
-                <div class="card">
-                    <img src="~/images/sanpham.png" class="card-img-top product-img" alt="" />
-                    <div class="card-body">
-                        <h5 class="card-title product-title font-14">Viên uống Glucosamine And Chondroitin Jpanwell hỗ trợ bổ sung chất nhờn dịch khớp (120 viên)</h5>
-                    </div>
-                    <div class="px-3">
-                        <div class="mb-1">
-                            <div class="font-14 text-blue">
-                                <span class="">768.000đ</span>
-                                <span class=""> / Hộp</span>
-                            </div>
-                        </div>
-                        <div class="font-14 opacity-50 mb-2 text-decoration-line-through">960.000đ</div>
-                        <p class="px-2 py-1 bg-secondary text-white rounded-3 w-fit font-12 opacity-50">Hộp 120 Viên</p>
-                        <button type="button" class="btn btn-primary rounded-pill w-100 mb-3">Chọn mua</button>
-                    </div>
-                </div>
-            </div>
-            <div class="col">
-                <div class="card">
-                    <img src="~/images/sanpham.png" class="card-img-top product-img" alt="" />
-                    <div class="card-body">
-                        <h5 class="card-title product-title font-14">Viên uống Glucosamine And Chondroitin Jpanwell hỗ trợ bổ sung chất nhờn dịch khớp (120 viên)</h5>
-                    </div>
-                    <div class="px-3">
-                        <div class="mb-1">
-                            <div class="font-14 text-blue">
-                                <span class="">768.000đ</span>
-                                <span class=""> / Hộp</span>
-                            </div>
-                        </div>
-                        <div class="font-14 opacity-50 mb-2 text-decoration-line-through">960.000đ</div>
-                        <p class="px-2 py-1 bg-secondary text-white rounded-3 w-fit font-12 opacity-50">Hộp 120 Viên</p>
-                        <button type="button" class="btn btn-primary rounded-pill w-100 mb-3">Chọn mua</button>
-                    </div>
-                </div>
-            </div>
-            <div class="col">
-                <div class="card">
-                    <img src="~/images/sanpham.png" class="card-img-top product-img" alt="" />
-                    <div class="card-body">
-                        <h5 class="card-title product-title font-14">Viên uống Glucosamine And Chondroitin Jpanwell hỗ trợ bổ sung chất nhờn dịch khớp (120 viên)</h5>
-                    </div>
-                    <div class="px-3">
-                        <div class="mb-1">
-                            <div class="font-14 text-blue">
-                                <span class="">768.000đ</span>
-                                <span class=""> / Hộp</span>
-                            </div>
-                        </div>
-                        <div class="font-14 opacity-50 mb-2 text-decoration-line-through">960.000đ</div>
-                        <p class="px-2 py-1 bg-secondary text-white rounded-3 w-fit font-12 opacity-50">Hộp 120 Viên</p>
-                        <button type="button" class="btn btn-primary rounded-pill w-100 mb-3">Chọn mua</button>
-                    </div>
-                </div>
-            </div>
-            <div class="col">
-                <div class="card">
-                    <img src="~/images/sanpham.png" class="card-img-top product-img" alt="" />
-                    <div class="card-body">
-                        <h5 class="card-title product-title font-14">Viên uống Glucosamine And Chondroitin Jpanwell hỗ trợ bổ sung chất nhờn dịch khớp (120 viên)</h5>
-                    </div>
-                    <div class="px-3">
-                        <div class="mb-1">
-                            <div class="font-14 text-blue">
-                                <span class="">768.000đ</span>
-                                <span class=""> / Hộp</span>
-                            </div>
-                        </div>
-                        <div class="font-14 opacity-50 mb-2 text-decoration-line-through">960.000đ</div>
-                        <p class="px-2 py-1 bg-secondary text-white rounded-3 w-fit font-12 opacity-50">Hộp 120 Viên</p>
-                        <button type="button" class="btn btn-primary rounded-pill w-100 mb-3">Chọn mua</button>
-                    </div>
-                </div>
-            </div>
-            <div class="col">
-                <div class="card">
-                    <img src="~/images/sanpham.png" class="card-img-top product-img" alt="" />
-                    <div class="card-body">
-                        <h5 class="card-title product-title font-14">Viên uống Glucosamine And Chondroitin Jpanwell hỗ trợ bổ sung chất nhờn dịch khớp (120 viên)</h5>
-                    </div>
-                    <div class="px-3">
-                        <div class="mb-1">
-                            <div class="font-14 text-blue">
-                                <span class="">768.000đ</span>
-                                <span class=""> / Hộp</span>
-                            </div>
-                        </div>
-                        <div class="font-14 opacity-50 mb-2 text-decoration-line-through">960.000đ</div>
-                        <p class="px-2 py-1 bg-secondary text-white rounded-3 w-fit font-12 opacity-50">Hộp 120 Viên</p>
-                        <button type="button" class="btn btn-primary rounded-pill w-100 mb-3">Chọn mua</button>
-                    </div>
-                </div>
-            </div>
-            <div class="col">
-                <div class="card">
-                    <img src="~/images/sanpham.png" class="card-img-top product-img" alt="" />
-                    <div class="card-body">
-                        <h5 class="card-title product-title font-14">Viên uống Glucosamine And Chondroitin Jpanwell hỗ trợ bổ sung chất nhờn dịch khớp (120 viên)</h5>
-                    </div>
-                    <div class="px-3">
-                        <div class="mb-1">
-                            <div class="font-14 text-blue">
-                                <span class="">768.000đ</span>
-                                <span class=""> / Hộp</span>
-                            </div>
-                        </div>
-                        <div class="font-14 opacity-50 mb-2 text-decoration-line-through">960.000đ</div>
-                        <p class="px-2 py-1 bg-secondary text-white rounded-3 w-fit font-12 opacity-50">Hộp 120 Viên</p>
-                        <button type="button" class="btn btn-primary rounded-pill w-100 mb-3">Chọn mua</button>
-                    </div>
-                </div>
-            </div>
+            }
         </div>
     </div>
 
