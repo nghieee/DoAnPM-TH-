@@ -52,5 +52,9 @@ namespace DoAnPM_TH_.Controllers
             return View(viewModel);
         }
 
+        public IActionResult ProductDetails()
+        {
+            return View();
+        }
     }
 }
