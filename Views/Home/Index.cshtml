@@ -30,6 +30,7 @@
 
     .category-item:hover .overlay {
         opacity: 1 !important;
+        pointer-events: none;
     }
 
     .product-title {
@@ -93,7 +94,8 @@
             @foreach (var category in Model.Categories)
             {
                 <div class="category-item col-2 pt-3 position-relative" style="cursor: pointer;">
-                    <a class="card card-body align-items-center rounded-12 justify-content-center" style="height: 126px;">
+                    <a class="card card-body align-items-center rounded-12 justify-content-center" style="height: 126px;"
+                       href="@Url.Action("Index", "Category", new { categoryId = category.CateId.Trim() })">
                         <img src="@Url.Content("~/images/CategoryImages/" + category.CateImg)" />
                         <div class="text-center mt-2">
                             <div class="fw-500 font-14">
@@ -104,7 +106,7 @@
                             </div>
                         </div>
                     </a>
-                    <div class="overlay position-absolute w-100 h-100 top-0 start-0 opacity-0 bg-white bg-opacity-25"></div>
+                    <div class="overlay position-absolute w-100 h-100 top-0 start-0 opacity-0 bg-white bg-opacity-25" style="pointer-events: none;"></div>
                 </div>
             }
         </div>
@@ -122,7 +124,7 @@
             @foreach (var product in Model.Products.Take(8))
             {
                 <div class="col">
-                    <div class="card">
+                    <div class="card rounded-12">
                         <img src="@Url.Content("~/images/ProductImages/" + product.ProImg)" class="card-img-top product-img" alt="Product Image" />
                         <div class="card-body">
                             <h5 class="card-title product-title font-14">@product.ProName</h5>
