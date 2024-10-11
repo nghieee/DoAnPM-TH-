@@ -1,0 +1,184 @@
+﻿@{
+}
+
+<div class="account__content container mt-4 mb-5">
+    <nav style="--bs-breadcrumb-divider: url(&#34;data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='8' height='8'%3E%3Cpath d='M2.5 0L1 1.5 3.5 4 1 6.5 2.5 8l4-4-4-4z' fill='%236c757d'/%3E%3C/svg%3E&#34;);" aria-label="breadcrumb">
+        <ol class="breadcrumb font-14">
+            <li class="breadcrumb-item"><a href="@Url.Action("Index", "Home")" class="text-black">Trang Chủ</a></li>
+            <li class="breadcrumb-item activetext-black" aria-current="page">Tài khoản</li>
+        </ol>
+    </nav>
+    <div class="container row justify-content-between">
+        <div class="login-section col-4">
+            <h2 class="fw-500">Đăng nhập</h2>
+            <div class="font-12 mb-3"><span>(*) </span>Các trường bắt buộc</div>
+            <div class="form-floating mb-3">
+                <input type="email" class="form-control" id="floatingInput" placeholder="name@example.com">
+                <label for="floatingInput">Địa chỉ email*</label>
+            </div>
+            <div class="form-floating mb-3">
+                <input type="password" class="form-control" id="floatingPassword" placeholder="Password">
+                <label for="floatingPassword">Mật khẩu*</label>
+            </div>
+            <div class="form-check font-12 mb-3">
+                <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked" checked>
+                <label class="form-check-label" for="flexCheckChecked">
+                    Ghi nhớ tôi
+                </label>
+            </div>
+            <div class="font-12 mb-3">
+                Trang này được bảo vệ bởi reCAPTCHA, Google
+                <a href="https://policies.google.com/privacy" target="_blank" rel="noopener">
+                    Chính sách bảo mật
+                </a> và
+                <a href="https://policies.google.com/terms" target="_blank" rel="noopener">
+                    Điều khoản dịch vụ
+                </a>.
+            </div>
+            <button type="button" class="col-12 btn btn-outline-dark fw-bold mb-3">ĐĂNG NHẬP</button>
+        </div>
+        <div class="registration-section col-7">
+            <h2 class="fw-500">Tạo tài khoản</h2>
+            <div class="font-12 mb-3"><span>(*) </span>Các trường bắt buộc</div>
+            <div class="d-flex flex-wrap">
+                <div class="col-6 form-floating mb-3 pe-3">
+                    <input type="text" class="account__input form-control" id="floatingInputFirstName" placeholder="Tên">
+                    <label class="account__label" for="floatingInputFirstName">Tên*</label>
+                </div>
+                <div class="col-6 form-floating mb-3 pe-3">
+                    <input type="text" class="account__input form-control" id="floatingInputLastName" placeholder="Tên">
+                    <label class="account__label" for="floatingInputLastName">Tên*</label>
+                </div>
+                <div class="col-6 form-floating mb-3 pe-3">
+                    <input type="email" class="account__input form-control" id="floatingInputEmail" placeholder="Email">
+                    <label class="account__label" for="floatingInputEmail">Email*</label>
+                </div>
+                <div class="col-6 form-floating mb-3 pe-3">
+                    <input type="password" class="account__input form-control" id="floatingInputPassword" placeholder="Mật khẩu">
+                    <label class="account__label" for="floatingInputPassword">Mật khẩu*</label>
+                </div>
+                <div class="col-6 form-floating mb-3 pe-3">
+                    <input type="password" class="account__input form-control" id="floatingInputConfirmPassword" placeholder="Xác nhận mật khẩu">
+                    <label class="account__label" for="floatingInputConfirmPassword">Xác nhận mật khẩu*</label>
+                </div>
+
+                <div class="col-6 form-floating mb-3 pe-3">
+                    <select class="form-select" id="floatingSelectGrid">
+                        <option value="Nam">Nam</option>
+                        <option value="Nu">Nữ</option>
+                    </select>
+                    <label for="floatingSelectGrid">Giới tính</label>
+                </div>
+
+                <div class="col-12 d-flex align-items-center justify-content-between mb-3 pe-3">
+                    <div class="me-3">Ngày sinh*</div>
+                    <div class="col-3 ">
+                        <label class="visually-hidden" for="daySelect">Ngày sinh</label>
+                        <select class="form-select" id="daySelect">
+                            <option selected>Ngày</option>
+                            <!-- Các option ngày sinh -->
+                        </select>
+                    </div>
+
+                    <div class="col-3">
+                        <label class="visually-hidden" for="monthSelect">Tháng sinh</label>
+                        <select class="form-select" id="monthSelect">
+                            <option selected>Tháng</option>
+                            <!-- Các option tháng sinh -->
+                        </select>
+                    </div>
+
+                    <div class="col-3">
+                        <label class="visually-hidden" for="yearSelect">Năm sinh</label>
+                        <select class="form-select" id="yearSelect">
+                            <option selected>Năm</option>
+                            <!-- Các option năm sinh -->
+                        </select>
+                    </div>
+                </div>
+
+                <div class="col-6 form-floating mb-3 pe-3">
+                    <input type="text" class="account__input form-control" id="floatingInputPhone" placeholder="Số điện thoại">
+                    <label class="account__label" for="floatingInputPhone">Số điện thoại*</label>
+                </div>
+
+                <div class="col-6 form-floating mb-3 pe-3">
+                    <input type="text" class="account__input form-control" id="floatingInputSmsCode" placeholder="Mã xác nhận">
+                    <label class="account__label" for="floatingInputSmsCode">Mã xác nhận qua SMS*</label>
+                </div>
+                <div class="col-6 mb-3 pe-3">
+                    <button type="button" class="btn btn-dark fw-bold">GỬI MÃ XÁC NHẬN</button>
+                </div>
+
+                <div class="col-12 font-12">
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" id="gridCheck1">
+                        <label class="form-check-label" for="gridCheck1">
+                            Có, tôi đồng ý nhận email của Kiehl's về các thông tin mới bao gồm ưu đãi độc quyền.
+                        </label>
+                    </div>
+
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" id="gridCheck2">
+                        <label class="form-check-label" for="gridCheck2">
+                            Tôi muốn tham gia Chương trình khách hàng thân thiết. Bằng cách đăng ký, bạn sẽ tự động
+                            nhận được email từ chương trình Khách hàng thân thiết.
+                            <a href="https://policies.google.com/privacy" target="_blank" rel="noopener">Chính sách bảo mật.*</a>
+                        </label>
+                    </div>
+
+                    <div class="form-check">
+                        <input class="form-check-input" type="checkbox" id="gridCheck3">
+                        <label class="form-check-label" for="gridCheck3">
+                            Tôi đồng ý <a href="https://policies.google.com/privacy" target="_blank" rel="noopener">Chính sách bảo mật.*</a>
+                        </label>
+                    </div>
+
+                    <div class="form-check mb-3">
+                        <input class="form-check-input" type="checkbox" id="gridCheck4">
+                        <label class="form-check-label" for="gridCheck4">
+                            Tôi đồng ý cho L’Oreal Việt Nam, các công ty liên kết, đại lý/đại diện và bên cung cấp dịch vụ
+                            của L’Oreal Việt Nam (tại Việt Nam và/hoặc ở bất kỳ nơi nào khác) thu thập các dữ liệu cá nhân
+                            của tôi, và cung cấp cho tôi các thông tin, tài liệu marketing về các sản phẩm, dịch vụ hoặc sự
+                            kiện của L’Oreal Việt Nam. *
+                        </label>
+                    </div>
+
+                    <div class="mb-3 pe-3">
+                        <button type="button" class="col-3 btn btn-outline-dark fw-bold">THAM GIA NGAY</button>
+                    </div>
+                </div>
+            </div>
+
+
+        </div>
+    </div>
+</div>
+
+<script>
+    var daySelect = document.getElementById('daySelect');
+    for (var day = 1; day <= 30; day++) {
+        var dayOption = document.createElement('option');
+        dayOption.value = day;
+        dayOption.textContent = day;
+        daySelect.appendChild(dayOption);
+    }
+
+    var monthSelect = document.getElementById('monthSelect');
+    for (var month = 1; month <= 12; month++) {
+        var monthOption = document.createElement('option');
+        monthOption.value = month;
+        monthOption.textContent = month;
+        monthSelect.appendChild(monthOption);
+    }
+
+    var yearSelect = document.getElementById('yearSelect');
+    var startYear = 1950;
+    var endYear = 2008;
+    for (var year = startYear; year <= endYear; year++) {
+        var yearOption = document.createElement('option');
+        yearOption.value = year;
+        yearOption.textContent = year;
+        yearSelect.appendChild(yearOption);
+    }
+</script>

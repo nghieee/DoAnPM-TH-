@@ -1,0 +1,191 @@
+﻿@{
+    ViewData["Title"] = "Privacy Policy";
+}
+@model DoAnPM_TH_.ViewModels.CategoryViewModel
+
+<style>
+    .rounded-12 {
+        border-radius: 12px;
+    }
+
+    .img {
+        width: 100%;
+        height: auto;
+    }
+
+    .custom-dropdown {
+        background-color: transparent;
+        border: 1px solid #ccc;
+    }
+
+    .product-item .card-title {
+        display: -webkit-box;
+        -webkit-line-clamp: 3;
+        -webkit-box-orient: vertical;
+        overflow: hidden;
+        text-overflow: ellipsis;
+    }
+
+</style>
+<div style="background-color: #edf0f3;">
+    <div class="main__content container pt-3">
+        <nav aria-label="breadcrumb">
+            <ol class="breadcrumb font-12">
+                <li class="breadcrumb-item"><a href="@Url.Action("Index", "Home")">Trang Chủ</a></li>
+                <li class="breadcrumb-item activetext-black" aria-current="page">@Model.Category.CateName</li>
+            </ol>
+        </nav>
+        <div class="main__content-tool container d-flex justify-content-between align-items-center p-0">
+            <div class="fw-500 font-16">@Model.Category.CateName</div>
+            <div class="tool-counting d-flex align-items-center">
+                <div class="counting-result pe-3">@Model.Category.CateProductCount sản phẩm</div>
+                <div class="dropdown">
+                    <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
+                        BÁN CHẠY
+                    </button>
+                    <ul class="dropdown-menu">
+                        <li><a class="dropdown-item" href="@Url.Action("Index", "Category", new { categoryId = Model.Category.CateId.Trim(), sortOrder = "asc" })">Giá Thấp</a></li>
+                        <li><a class="dropdown-item" href="@Url.Action("Index", "Category", new { categoryId = Model.Category.CateId.Trim(), sortOrder = "desc" })">Giá Cao</a></li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="main__content-list d-flex mt-4 mb-5">
+            <div class="col-3 pe-4">
+                <div class="p-3 bg-body bg-opacity-25 fw-500">
+                    Lọc (<span id="filter-count">0</span>)
+                    <a href="#" id="reset-filter" class="float-end text-decoration-underline text-black">Cài lại</a>
+                </div>
+                <div class="accordion" id="accordionExample">
+                    <div class="accordion-item border-bottom border-0">
+                        <h2 class="accordion-header">
+                            <button class="accordion-button collapsed fw-500 text-black" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                                Giá bán
+                            </button>
+                        </h2>
+                        <div id="collapseOne" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
+                            <div class="accordion-body">
+                                <div class="btn-group-vertical w-100" role="group" aria-label="Vertical button group">
+                                    <button type="button" class="btn btn-white border rounded-3 p-2 mb-2">Dưới 100.000đ</button>
+                                    <button type="button" class="btn btn-white border rounded-3 p-2 mb-2">100.000đ đến 300.000đ</button>
+                                    <button type="button" class="btn btn-white border rounded-3 p-2 mb-2">300.000đ đến 500.000đ</button>
+                                    <button type="button" class="btn btn-white border rounded-3 p-2">Trên 500.000đ</button>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="accordion-item border-top border-0">
+                        <h2 class="accordion-header">
+                            <button class="accordion-button collapsed fw-500 text-black" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                                Thương hiệu
+                            </button>
+                        </h2>
+                        <div id="collapseTwo" class="accordion-collapse collapse" data-bs-parent="#accordionExample">
+                            <div class="accordion-body">
+                                <div id="panelsStayOpen-collapseOne" class="accordion-collapse collapse show">
+                                    <div class="accordion-body">
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" value="" id="flexCheckDefault" checked>
+                                            <label class="form-check-label" for="flexCheckDefault">
+                                                aaa
+                                            </label>
+                                        </div>
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked">
+                                            <label class="form-check-label" for="flexCheckDefault">
+                                                aa
+                                            </label>
+                                        </div>
+                                        <div class="form-check">
+                                            <input class="form-check-input" type="checkbox" value="" id="flexCheckChecked">
+                                            <label class="form-check-label" for="flexCheckDefault">
+                                                aa
+                                            </label>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            <div class="main__content-product col-9">
+                <div class="row row-cols-4">
+                    @foreach (var product in Model.Products)
+                    {
+                        <div class="col product-item pb-3">
+                            <div class="card rounded-12">
+                                <img src="@Url.Content("~/images/ProductImages/" + product.ProImg)" class="card-img-top product-img rounded-12 p-3" alt="Product Image" />
+                                <div class="card-body">
+                                    <h5 class="card-title product-title font-14">@product.ProName</h5>
+                                </div>
+                                <div class="px-3">
+                                    <div class="mb-1">
+                                        <div class="font-14 text-blue">
+                                            <span>@($"{product.Price:N0}đ")</span>
+                                            <span class=""> / Hộp</span>
+                                        </div>
+                                    </div>
+                                    <button type="button" class="add-to-cart btn btn-primary rounded-pill w-100 mb-3"
+                                            data-id="@product.ProId"
+                                            data-name="@product.ProName"
+                                            data-price="@product.Price"
+                                            data-img="@Url.Content("~/images/ProductImages/" + product.ProImg)">
+                                        Chọn mua
+                                    </button>
+                                </div>
+                            </div>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+<script>
+    const dropdown = document.getElementById('dropdownMenu');
+    const priceDisplay = document.getElementById('priceDisplay');
+
+    dropdown.addEventListener('change', function () {
+        const selectedOption = dropdown.options[dropdown.selectedIndex];
+        const price = selectedOption.getAttribute('data-price');
+        priceDisplay.innerText = price;
+    });
+
+    //Start-Filter
+    document.addEventListener('DOMContentLoaded', function () {
+        var checkboxes = document.querySelectorAll('.form-check-input');
+        var filterCount = document.getElementById('filter-count');
+        var resetFilter = document.getElementById('reset-filter');
+
+        //Đếm checkbox
+        function updateFilterCount() {
+            var checkedCount = document.querySelectorAll('.form-check-input:checked').length;
+            filterCount.textContent = checkedCount;
+
+            if (checkedCount > 0) {
+                resetFilter.style.display = 'inline';
+            } else {
+                resetFilter.style.display = 'none';
+            }
+        }
+
+        checkboxes.forEach(function (checkbox) {
+            checkbox.addEventListener('change', updateFilterCount);
+        });
+
+        resetFilter.addEventListener('click', function (event) {
+            event.preventDefault();
+
+            checkboxes.forEach(function (checkbox) {
+                checkbox.checked = false;
+            });
+
+            updateFilterCount();
+        });
+
+        updateFilterCount();
+    });
+
+</script>

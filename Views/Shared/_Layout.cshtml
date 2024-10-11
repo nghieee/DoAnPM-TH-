@@ -1,0 +1,197 @@
+﻿<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="utf-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>@ViewData["Title"] - DoAnPM_TH_</title>
+    <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
+    <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
+    <link rel="stylesheet" href="~/DoAnPM_TH_.styles.css" asp-append-version="true" />
+    <script src="https://kit.fontawesome.com/eaf1554704.js" crossorigin="anonymous"></script>
+</head>
+<body>
+    <header>
+        <div class="header__top container pb-2">
+            <div class="d-flex justify-content-between align-items-center font-14" style="height: 36px;">
+                <div class="col-auto">
+                    <i class="fa-solid fa-bullhorn" style="color: #ffffff;"></i>
+                    Chào mừng bạn đến với nhà thuốc Long Châu Phake
+                </div>
+                <div class="col-auto">
+                    <ul class="d-flex align-items-center">
+                        <li>
+                            <i class="fa-solid fa-inbox" style="color: #ffffff;"></i>
+                            Email: cskh@longchauphake.vn
+                        </li>
+                        <li class="ms-3">
+                            <i class="fa-solid fa-phone" style="color: #ffffff;"></i>
+                            Hotline: 028.3636.7777
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="header__main container pb-2">
+            <div class="d-flex justify-content-between align-items-center">
+                <div class="col-auto">
+                    <a href="@Url.Action("Index", "Home")"><img src="~/images/logo_lc_default.png" /></a>
+                </div>
+                <div class="col-auto">
+                    <div class="input-field">
+                        <button class="btn-search">
+                            <i class="fa-solid fa-magnifying-glass" style="color: #1250dc;"></i>
+                        </button>
+                        <input class="search" type="text" placeholder="Tìm tên thuốc..." value="">
+                    </div>
+                </div>
+                <div class="col-auto">
+                    <ul class="d-flex align-items-center">
+                        <li class="login-button">
+                            <a href="@Url.Action("Account", "Home")" style="color: white;">
+                                <i class="fa-solid fa-user me-1" style="color: #ffffff;"></i>
+                                Đăng nhập
+                            </a>
+                        </li>
+                        <li class="cart-button" style="color: white;">
+                            <a href="#" style="color: white;">
+                                <i class="fa-solid fa-cart-shopping me-1" style="color: #ffffff;"></i>
+                                Giỏ hàng
+                            </a>
+                        </li>
+                    </ul>
+                </div>
+            </div>
+        </div>
+        <div class="header__navigation container">
+            <ul class="d-flex justify-content-center">
+                <li class="pe-3">
+                    <a href="#">Thực phẩm chức năng</a>
+                </li>
+                <li class="pe-3">
+                    <a href="#">Dược mỹ phẩm</a>
+                </li>
+                <li class="pe-3">
+                    <a href="#">Chăm sóc cá nhân</a>
+                </li>
+                <li class="pe-3">
+                    <a href="#">Thuốc</a>
+                </li>
+                <li class="pe-3">
+                    <a href="#">Thiết bị y tế</a>
+                </li>
+            </ul>
+        </div>
+    </header>
+
+    <main>
+        @RenderBody()
+    </main>
+
+    <footer>
+        <div class="footer__top">
+        </div>
+        <div class="footer__main container">
+            <div class="d-flex justify-content-between font-14 pt-3">
+                <div class="footer__main-about">
+                    <div class="font-16 fw-500 pb-2">Về chúng tôi</div>
+                    <ul>
+                        <li>
+                            <a href="#">Giới thiệu</a>
+                        </li>
+                        <li>
+                            <a href="#">Giấy phép kinh doanh</a>
+                        </li>
+                        <li>
+                            <a href="#">Quy chế hoạt động</a>
+                        </li>
+                        <li>
+                            <a href="#">Chính sách đặt cọc</a>
+                        </li>
+                        <li>
+                            <a href="#">Chính sách nội dung</a>
+                        </li>
+                        <li>
+                            <a href="#">Chính sách đổi trả</a>
+                        </li>
+                        <li>
+                            <a href="#">Chính sách giao hàng</a>
+                        </li>
+                        <li>
+                            <a href="#">Chính sách bảo mật</a>
+                        </li>
+                        <li>
+                            <a href="#">Chính sách thanh toán</a>
+                        </li>
+                        <li>
+                            <a href="#">Kiểm tra hóa đơn điện tử</a>
+                        </li>
+                        <li>
+                            <a href="#">Chính sách thu thập và xử lý dữ liệu cá nhân</a>
+                        </li>
+                        <li>
+                            <a href="#">Thông tin trung tâm bảo hành thiết bị y tế từng hãng</a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="footer__main-cate">
+                    <div class="font-16 fw-500 pb-2">Danh mục</div>
+                    <ul>
+                        <li>
+                            <a href="#">Thực phẩm chức năng</a>
+                        </li>
+                        <li>
+                            <a href="#">Dược mỹ phẩm</a>
+                        </li>
+                        <li>
+                            <a href="#">Chăm sóc cá nhân</a>
+                        </li>
+                        <li>
+                            <a href="#">Thuốc</a>
+                        </li>
+                        <li>
+                            <a href="#">Thiết bị y tế</a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="footer__main-contact">
+                    <div class="font-16 fw-500 pb-2">Tổng đài</div>
+                    <ul>
+                        Tư vấn mua hàng
+                        <li>
+                            <a href="#">18006928 (Nhánh 1)</a>
+                        </li>
+                        Trung tâm tư vấn
+                        <li>
+                            <a href="#">18006928 (Nhánh 2)</a>
+                        </li>
+                        Góp ý, khiếu nại
+                        <li>
+                            <a href="#">18006928 (Nhánh 3)</a>
+                        </li>
+                    </ul>
+                </div>
+                <div class="footer__main-connect">
+                    <div>
+                        <div class="font-16 fw-500 pb-2">Kết nối với chúng tôi</div>
+                        <img src="~/images/facebook_logo.png" style="width: 28px;"/>
+                        <img src="~/images/logo_zalo.png" style="width: 28px;"/>
+                    </div>
+                    <div>
+                        <div class="font-16 fw-500 pb-2 mt-5">Tải ứng dụng Long Châu phake</div>
+                        <img src="~/images/qr_100x100.png"/>
+                    </div>
+                </div>
+                <div class="footer__main-certify">
+                    <div class="font-17 fw-500 pb-2">Chứng nhận bởi</div>
+                    <img src="~/images/bo_cong_thuong.png" />
+                    <img src="~/images/dmca.png" />
+                </div>
+            </div>
+        </div>
+    </footer>
+    <script src="~/lib/jquery/dist/jquery.min.js"></script>
+    <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="~/js/site.js" asp-append-version="true"></script>
+    @await RenderSectionAsync("Scripts", required: false)
+</body>
+</html>
