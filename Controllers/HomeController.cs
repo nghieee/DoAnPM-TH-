@@ -17,6 +17,44 @@ namespace DoAnPM_TH_.Controllers
             _context = context;
         }
 
+        [HttpGet]
+        public IActionResult SearchAjax(string keyword)
+        {
+            if (string.IsNullOrEmpty(keyword))
+            {
+                return Json(new List<Product>());
+            }
+
+            var products = _context.Products
+                           .Where(p => p.ProName.Contains(keyword))
+                           .Select(p => new 
+                           { 
+                               p.ProId, 
+                               p.ProName, 
+                               p.Price, 
+                               p.Unit, 
+                               p.ProImg 
+                           })  
+                           .Take(4)  
+                           .ToList();
+
+            return Json(products);
+        }
+
+        [HttpPost]
+        public IActionResult SearchResult(string keyword)
+        {
+            if (string.IsNullOrEmpty(keyword))
+            {
+                return View(new List<Product>()); 
+            }
+
+            var products = _context.Products.Where(p => p.ProName.Contains(keyword)).ToList();
+
+            return View(products); 
+        }
+
+
         public IActionResult Index()
         {
             var categories = _context.Categories.ToList();

@@ -1,6 +1,12 @@
 ﻿@{
 }
+@model DoAnPM_TH_.ViewModels.ProductDetailModel
+
 <style>
+    .rounded-12 {
+        border-radius: 12px;
+    }
+
     .text-blue {
         color: #1250dc;
     }
@@ -10,8 +16,8 @@
     }
 
     .vertical-slider {
-        width: 70px;
-        max-height: 340px;
+        width: 80px;
+        max-height: 448px;
         overflow: hidden;
         position: relative;
         display: flex;
@@ -38,6 +44,9 @@
             cursor: pointer;
         }
 
+    .selected-item-slider {
+        border: 1px solid #1250dc !important;
+    }
 
     .quantity-btn-left {
         border-radius: 24px 0px 0px 24px;
@@ -53,103 +62,136 @@
         border-radius: 32px;
     }
 </style>
-
-<div class="main-content container pb-5">
-    <nav aria-label="breadcrumb" class="pt-3">
+<div class="pb-4" style="background-color: #EDF0F3;">
+    <nav aria-label="breadcrumb" class="pt-3 container">
         <ol class="breadcrumb font-12">
             <li class="breadcrumb-item"><a href="@Url.Action("Index", "Home")">Trang Chủ</a></li>
-            <li class="breadcrumb-item activetext-black" aria-current="page">CateName</li>
+            <li class="breadcrumb-item activetext-black" aria-current="page">@Model.Category.CateName</li>
         </ol>
     </nav>
+    <div class="main-content container pb-5 bg-white rounded-12 pt-3">
+        <div class="c-product__inner row row-cols-2">
+            <div class="col d-flex justify-content-around" style="">
+                <div class="vertical-slider">
+                    <div onclick="moveUp()">
+                        <i class="fa-solid fa-chevron-up text-black" style="cursor: pointer;"></i>
+                    </div>
 
-    <div class="c-product__inner row row-cols-2">
-        <div class="col d-flex justify-content-around">
-            <div class="vertical-slider">
-                <div onclick="moveUp()">
-                    <i class="fa-solid fa-chevron-up text-black" style="cursor: pointer;"></i>
-                </div>
+                    <div class="slider-wrapper">
+                        <div id="sliderImages" class="slider-images">
+                            <img class="border p-2 rounded-12" src="@Model.Product.ProImg" alt="Image 1" onclick="imageClicked(this)">
+                            @foreach (var image in Model.ListProductImg)
+                            {
+                                <img class="border p-2 rounded-12" src="@image.ImgUrl" alt="Product Image" onclick="imageClicked(this)">
+                            }
+                        </div>
+                    </div>
 
-                <div class="slider-wrapper">
-                    <div id="sliderImages" class="slider-images">
-                        <img class="border" src="~/images/ProductImages/ThanKinhNao_AnNgonNguNgon.png" alt="Image 1" onclick="imageClicked(this)">
-                        <img class="border" src="~/images/ProductImages/ThanKinhNao_AnNgonNguNgon.png" alt="Image 2" onclick="imageClicked(this)">
-                        <img class="border" src="~/images/ProductImages/ThanKinhNao_AnNgonNguNgon.png" alt="Image 3" onclick="imageClicked(this)">
-                        <img class="border" src="~/images/ProductImages/ThanKinhNao_AnNgonNguNgon.png" alt="Image 4" onclick="imageClicked(this)">
-                        <img class="border" src="~/images/ProductImages/ThanKinhNao_AnNgonNguNgon.png" alt="Image 5" onclick="imageClicked(this)">
+                    <div onclick="moveDown()">
+                        <i class="fa-solid fa-chevron-down text-black" style="cursor: pointer"></i>
                     </div>
                 </div>
+                <div id="mainImageContainer" style="padding: 51px;">
+                    <img id="mainImage" style="width: 372px; height: 372px;" src="@Url.Content("~/images/ProductImages/" + @Model.Product.ProImg)" />
+                </div>
 
-                <div onclick="moveDown()">
-                    <i class="fa-solid fa-chevron-down text-black" style="cursor: pointer"></i>
+            </div>
+            <div class="product-info col">
+                <div class="product-details">
+                    <p class="fw-500">Thương hiệu: <span class="text-blue">Tên Thương Hiệu</span></p>
+                    <h3 class="product-title font-serif fw-500 m-0">@Model.Product.ProName</h3>
+                    <div class="d-flex align-items-center pt-3 pb-3">
+                        <span>@Model.Product.ProId</span>
+                        <span class="d-inline-block bg-black bg-opacity-25 rounded-pill me-1 ms-1" style="width: .25rem; height: .25rem;"></span>
+                        <span>Ratting</span>
+                        <span class="d-inline-block bg-black bg-opacity-25 rounded-pill me-1 ms-1" style="width: .25rem; height: .25rem;"></span>
+                        <span class="text-blue">10 đánh giá</span>
+                        <span class="d-inline-block bg-black bg-opacity-25 rounded-pill me-1 ms-1" style="width: .25rem; height: .25rem;"></span>
+                        <span class="text-blue">10 bình luận</span>
+                    </div>
+                    <h3 id="main-product-price" class="font-18 fw-500 pb-3 text-blue">@($"{Model.Product.Price:N0}đ") / @Model.Product.Unit</h3>
                 </div>
-            </div>
-            <div id="mainImageContainer">
-                <img id="mainImage" style="width: 465px; height: 465px;" src="~/images/ProductImages/ThanKinhNao_AnNgonNguNgon.png" />
-            </div>
-
-        </div>
-        <div class="product-info col">
-            <div class="product-details">
-                <p class="fw-500">Thương hiệu: <span class="text-blue">Tên Thương Hiệu</span></p>
-                <h3 class="product-title font-serif fw-500 m-0">Viên uống Omexxel Ginkgo 120 Premium Omexxel hỗ trợ tốt cho não và tim mạch (60 viên)</h3>
-                <div class="d-flex align-items-center pt-3 pb-3">
-                    <span>Mã sản phẩm</span>
-                    <span class="d-inline-block bg-black bg-opacity-25 rounded-pill me-1 ms-1" style="width: .25rem; height: .25rem;"></span>
-                    <span>Ratting</span>
-                    <span class="d-inline-block bg-black bg-opacity-25 rounded-pill me-1 ms-1" style="width: .25rem; height: .25rem;"></span>
-                    <span class="text-blue">10 đánh giá</span>
-                    <span class="d-inline-block bg-black bg-opacity-25 rounded-pill me-1 ms-1" style="width: .25rem; height: .25rem;"></span>
-                    <span class="text-blue">10 bình luận</span>
+                <table class="product-content-list">
+                    <tbody>
+                        <tr>
+                            <td class="d-flex me-3" style="width: 155px;">
+                                <p class="m-0">Danh mục</p>
+                            </td>
+                            <td class="pb-3">
+                                <a>@Model.Category.CateName</a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="d-flex" style="padding-bottom: 12px;">
+                                <p class="m-0">Xuất xứ thương hiệu</p>
+                            </td>
+                            <td style="padding-bottom: 12px;">
+                                <a>@Model.Product.BrandOrigin</a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="d-flex">
+                                <p class="m-0">Nhà sản xuất</p>
+                            </td>
+                            <td class="pb-3">
+                                <a>@Model.Manufacturer.ManName</a>
+                            </td>
+                        </tr>
+                        <tr>
+                            <td class="d-flex">
+                                <p class="m-0">Nước sản xuất</p>
+                            </td>
+                            <td class="pb-3">
+                                <a>@Model.Manufacturer.ManCountry</a>
+                            </td>
+                        </tr>
+                        @if (!string.IsNullOrEmpty(Model.Product.Support))
+                        {
+                            <tr>
+                                <td class="d-flex">
+                                    <p class="m-0">Hỗ trợ</p>
+                                </td>
+                                <td class="pb-3">
+                                    <a>@Model.Product.Support</a>
+                                </td>
+                            </tr>
+                        }
+                        @if (!string.IsNullOrEmpty(Model.Product.Ingredient))
+                        {
+                            <tr>
+                                <td class="d-flex">
+                                    <p class="m-0">Thành phần</p>
+                                </td>
+                                <td class="pb-3">
+                                    <a>@Model.Product.Ingredient</a>
+                                </td>
+                            </tr>
+                        }
+                        @if (!string.IsNullOrEmpty(Model.Product.Descript))
+                        {
+                            <tr>
+                                <td class="d-flex">
+                                    <p class="m-0">Mô tả ngắn</p>
+                                </td>
+                                <td class="pb-3">
+                                    <a>@Model.Product.Descript</a>
+                                </td>
+                            </tr>
+                        }
+                    </tbody>
+                </table>
+                <div class="quantity-section d-flex align-items-center pt-4 pb-4">
+                    <p class="m-0 pe-4">Chọn số lượng</p>
+                    <div class="quantity-input input-group" style="width: 140px;">
+                        <button class="quantity-btn-left btn-outline-secondary border-dark border border-end-0" type="button" aria-label="Giảm số lượng" disabled>−</button>
+                        <input type="number" class="form-control text-center border-top border-bottom border-0 border-dark bg-white" id="quantity-031565" name="quantity" value="1" min="1" max="5" readonly aria-label="Số lượng">
+                        <button class="quantity-btn-right btn-outline-secondary border-dark border border-start-0" type="button" aria-label="Tăng số lượng">+</button>
+                    </div>
                 </div>
-                <h3 id="main-product-price" class="font-18 fw-500 pb-3 text-blue">1.850.000đ / Hộp</h3>
-            </div>
-            <table class="product-content-list">
-                <tbody>
-                    <tr>
-                        <td class="d-flex me-3" style="width: 155px;">
-                            <p class="m-0">Danh mục</p>
-                        </td>
-                        <td class="pb-3">
-                            <a>Tên danh mục</a>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td class="d-flex" style="padding-bottom: 12px;">
-                            <p class="m-0">Xuất xứ thương hiệu</p>
-                        </td>
-                        <td style="padding-bottom: 12px;">
-                            <a>Tên thương hiệu</a>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td class="d-flex">
-                            <p class="m-0">Nhà sản xuất</p>
-                        </td>
-                        <td class="pb-3">
-                            <a>Tên nhà sản xuất</a>
-                        </td>
-                    </tr>
-                    <tr>
-                        <td class="d-flex">
-                            <p class="m-0">Mô tả ngắn</p>
-                        </td>
-                        <td class="pb-3">
-                            <a>Tên nhà sản xuất Tên nhà sản xuấtTên nhà sản xuấtTên nhà sản xuấtTên nhà sản xuấtTên nhà sản xuấtTên nhà sản xuấtTên nhà sản xuất</a>
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
-            <div class="quantity-section d-flex align-items-center pt-4 pb-4">
-                <p class="m-0 pe-4">Chọn số lượng</p>
-                <div class="quantity-input input-group" style="width: 140px;">
-                    <button class="quantity-btn-left btn-outline-secondary border-dark border border-end-0" type="button" aria-label="Giảm số lượng" disabled>−</button>
-                    <input type="number" class="form-control text-center border-top border-bottom border-0 border-dark bg-white" id="quantity-031565" name="quantity" value="1" min="1" max="5" readonly aria-label="Số lượng">
-                    <button class="quantity-btn-right btn-outline-secondary border-dark border border-start-0" type="button" aria-label="Tăng số lượng">+</button>
-                </div>
-            </div>
-            <div class="buy-btn-section">
-                <div style="width: 375px; height: 56px">
-                    <button type="button" class="buy-btn btn bg-blue text-white add-to-cart w-100 h-100" data-name="" data-price="">THÊM VÀO GIỎ HÀNG</button>
+                <div class="buy-btn-section">
+                    <div style="width: 375px; height: 56px">
+                        <button type="button" class="buy-btn btn bg-blue text-white add-to-cart w-100 h-100" data-name="" data-price="">THÊM VÀO GIỎ HÀNG</button>
+                    </div>
                 </div>
             </div>
         </div>
@@ -158,9 +200,9 @@
 
 
 <script>
-    /Start-ProducSlider
+    //Start-ProducSlider
     let currentPosition = 0;
-    const imageHeight = 70;
+    const imageHeight = 128;
     const totalImages = document.querySelectorAll('.slider-images img').length;
     const visibleImages = 4;
 

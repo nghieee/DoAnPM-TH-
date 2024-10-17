@@ -19,9 +19,9 @@ public partial class User
 
     public string? Role { get; set; }
 
-    public virtual ICollection<Order> Orders { get; } = new List<Order>();
+    public virtual ICollection<Order> Orders { get; set; } = new List<Order>();
 
-    public virtual ICollection<Rating> Ratings { get; } = new List<Rating>();
+    public virtual ICollection<Rating> Ratings { get; set; } = new List<Rating>();
 
-    public virtual ICollection<Product> Pros { get; } = new List<Product>();
+    public virtual ICollection<Product> Pros { get; set; } = new List<Product>();
 }

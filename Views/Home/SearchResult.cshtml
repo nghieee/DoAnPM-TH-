@@ -1,8 +1,8 @@
 ﻿@{
-    ViewData["Title"] = "Privacy Policy";
+    ViewData["Title"] = "Kết quả tìm kiếm";
 }
-@model DoAnPM_TH_.ViewModels.CategoryViewModel
 
+@model List<DoAnPM_TH_.Models.Product>
 <style>
     .rounded-12 {
         border-radius: 12px;
@@ -24,27 +24,6 @@
 </style>
 <div style="background-color: #edf0f3;">
     <div class="main__content container pt-3">
-        <nav aria-label="breadcrumb">
-            <ol class="breadcrumb font-12">
-                <li class="breadcrumb-item"><a href="@Url.Action("Index", "Home")">Trang Chủ</a></li>
-                <li class="breadcrumb-item activetext-black" aria-current="page">@Model.Category.CateName</li>
-            </ol>
-        </nav>
-        <div class="main__content-tool container d-flex justify-content-between align-items-center p-0">
-            <div class="fw-500 font-16">@Model.Category.CateName</div>
-            <div class="tool-counting d-flex align-items-center">
-                <div class="counting-result pe-3">@Model.Category.CateProductCount sản phẩm</div>
-                <div class="dropdown">
-                    <button class="btn btn-secondary dropdown-toggle" type="button" data-bs-toggle="dropdown" aria-expanded="false">
-                        BÁN CHẠY
-                    </button>
-                    <ul class="dropdown-menu">
-                        <li><a class="dropdown-item" href="@Url.Action("Index", "Category", new { categoryId = Model.Category.CateId.Trim(), sortOrder = "asc" })">Giá Thấp</a></li>
-                        <li><a class="dropdown-item" href="@Url.Action("Index", "Category", new { categoryId = Model.Category.CateId.Trim(), sortOrder = "desc" })">Giá Cao</a></li>
-                    </ul>
-                </div>
-            </div>
-        </div>
         <div class="main__content-list d-flex mt-4 mb-5">
             <div class="col-3 pe-4">
                 <div class="p-3 bg-body bg-opacity-25 fw-500">
@@ -106,33 +85,40 @@
             </div>
             <div class="main__content-product col-9">
                 <div class="row row-cols-4">
-                    @foreach (var product in Model.Products)
+                    @if (Model != null && Model.Count > 0)
                     {
-                        <div class="col product-item pb-3">
-                            <div class="card rounded-12">
-                                <a href="@Url.Action("ProductDetails", "Category", new { productId = product.ProId.Trim() })" class="text-decoration-none text-black">
-                                    <img src="@product.ProImg" class="card-img-top product-img p-3" alt="Product Image" />
-                                    <div class="card-body">
-                                        <h5 class="card-title product-title font-14">@product.ProName</h5>
-                                    </div>
-                                </a>
-                                <div class="px-3">
-                                    <div class="mb-1">
-                                        <div class="font-14 text-blue">
-                                            <span>@($"{product.Price:N0}đ")</span>
-                                            <span class=""> / Hộp</span>
+                        @foreach (var product in Model)
+                        {
+                            <div class="col product-item pb-3">
+                                <div class="card rounded-12">
+                                    <a href="@Url.Action("ProductDetails", "Category", new { productId = product.ProId.Trim() })" class="text-decoration-none text-black">
+                                        <img src="@product.ProImg" class="card-img-top product-img p-3" alt="Product Image" />
+                                        <div class="card-body">
+                                            <h5 class="card-title product-title font-14">@product.ProName</h5>
                                         </div>
+                                    </a>
+                                    <div class="px-3">
+                                        <div class="mb-1">
+                                            <div class="font-14 text-blue">
+                                                <span>@($"{product.Price:N0}đ")</span>
+                                                <span class=""> / Hộp</span>
+                                            </div>
+                                        </div>
+                                        <button type="button" class="add-to-cart btn btn-primary rounded-pill w-100 mb-3"
+                                                data-id="@product.ProId"
+                                                data-name="@product.ProName"
+                                                data-price="@product.Price"
+                                                data-img="@product.ProImg">
+                                            Chọn mua
+                                        </button>
                                     </div>
-                                    <button type="button" class="add-to-cart btn btn-primary rounded-pill w-100 mb-3"
-                                            data-id="@product.ProId"
-                                            data-name="@product.ProName"
-                                            data-price="@product.Price"
-                                            data-img="@product.ProImg">
-                                        Chọn mua
-                                    </button>
                                 </div>
                             </div>
-                        </div>
+                        }
+                    }
+                    else
+                    {
+                        <p>Không tìm thấy sản phẩm nào.</p>
                     }
                 </div>
             </div>
@@ -141,6 +127,8 @@
 </div>
 
 <script>
+    const priceDisplay = document.getElementById('priceDisplay');
+
     //Start-Filter
     document.addEventListener('DOMContentLoaded', function () {
         var checkboxes = document.querySelectorAll('.form-check-input');
