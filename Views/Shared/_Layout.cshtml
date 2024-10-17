@@ -37,12 +37,18 @@
                     <a href="@Url.Action("Index", "Home")"><img src="~/images/logo_lc_default.png" /></a>
                 </div>
                 <div class="col-auto">
-                    <div class="input-field">
-                        <button class="btn-search">
-                            <i class="fa-solid fa-magnifying-glass" style="color: #1250dc;"></i>
-                        </button>
-                        <input class="search" type="text" placeholder="Tìm tên thuốc..." value="">
-                    </div>
+                    <form action="/Home/SearchResult" method="post" id="searchForm">
+                        <div class="input-field position-relative">
+                            <button class="btn-search" type="submit">
+                                <i class="fa-solid fa-magnifying-glass" style="color: #1250dc;"></i>
+                            </button>
+                            <input class="search" type="text" name="keyword" id="searchInput" placeholder="Tìm tên thuốc..." oninput="searchProducts()" autocomplete="off" value="" />
+                            @* Hiển thị kết quả ở đây (xử lý js) *@
+                            <div id="searchResult" class="position-absolute bg-white border mt-1" style="display:none; width: 100%; z-index: 10;">
+                                @* Kết quả tìm kiếm sẽ được hiển thị tại đây  *@
+                            </div>
+                        </div>
+                    </form>
                 </div>
                 <div class="col-auto">
                     <ul class="d-flex align-items-center">
@@ -193,5 +199,47 @@
     <script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
     <script src="~/js/site.js" asp-append-version="true"></script>
     @await RenderSectionAsync("Scripts", required: false)
+    <script>
+        //Search-Start
+        document.getElementById('searchInput').addEventListener('input', function () {
+        var keyword = this.value;
+
+        if (keyword.length > 0) {
+            fetch(`/Home/SearchAjax?keyword=${keyword}`)
+                .then(response => response.json())
+                .then(data => {
+                    var searchResult = document.getElementById('searchResult');
+                    searchResult.innerHTML = ''; // Xóa kết quả cũ
+
+                    if (data.length > 0) {
+                        data.forEach(product => {
+                            var productItem = `<div class="search-item">
+                                <a href="/Product/ProductDetails?productId=${product.ProId}">${product.ProName}</a>
+                            </div>`;
+                            searchResult.innerHTML += productItem;
+                        });
+
+                        searchResult.innerHTML += `<div class="search-item justify-content-center">
+                            <a href="/Home/SearchResult?keyword=${keyword}">Xem tất cả sản phẩm</a>
+                        </div>`;
+                        searchResult.style.display = 'block';
+                    } else {
+                        searchResult.style.display = 'none';
+                    }
+                });
+        } else {
+            document.getElementById('searchResult').style.display = 'none';
+        }
+    });
+
+    // Ẩn kết quả tìm kiếm khi nhấn ngoài vùng input
+    document.addEventListener('click', function (e) {
+        var searchResult = document.getElementById('searchResult');
+        if (!document.getElementById('searchInput').contains(e.target) && !searchResult.contains(e.target)) {
+            searchResult.style.display = 'none';
+        }
+    });
+    //Search-End
+    </script>
 </body>
 </html>

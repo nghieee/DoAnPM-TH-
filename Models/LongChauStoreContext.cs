@@ -19,6 +19,8 @@ public partial class LongChauStoreContext : DbContext
 
     public virtual DbSet<Category> Categories { get; set; }
 
+    public virtual DbSet<ListProductImg> ListProductImgs { get; set; }
+
     public virtual DbSet<Manufacturer> Manufacturers { get; set; }
 
     public virtual DbSet<Order> Orders { get; set; }
@@ -34,7 +36,7 @@ public partial class LongChauStoreContext : DbContext
     public virtual DbSet<Voucher> Vouchers { get; set; }
 
     protected override void OnConfiguring(DbContextOptionsBuilder optionsBuilder)
-#warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see http://go.microsoft.com/fwlink/?LinkId=723263.
+#warning To protect potentially sensitive information in your connection string, you should move it out of source code. You can avoid scaffolding the connection string by using the Name= syntax to read it from configuration - see https://go.microsoft.com/fwlink/?linkid=2131148. For more guidance on storing connection strings, see https://go.microsoft.com/fwlink/?LinkId=723263.
         => optionsBuilder.UseSqlServer("Data Source=DESKTOP-NKSMOFR\\SQLEXPRESS;Initial Catalog=LongChauStore;Integrated Security=True;Connect Timeout=30;Encrypt=True;Trust Server Certificate=True;Application Intent=ReadWrite;Multi Subnet Failover=False");
 
     protected override void OnModelCreating(ModelBuilder modelBuilder)
@@ -46,13 +48,11 @@ public partial class LongChauStoreContext : DbContext
             entity.ToTable("Brand");
 
             entity.Property(e => e.BrandId)
-                .HasMaxLength(8)
+                .HasMaxLength(50)
                 .IsUnicode(false)
-                .IsFixedLength()
                 .HasColumnName("BrandID");
-            entity.Property(e => e.BrandName)
-                .HasMaxLength(20)
-                .IsUnicode(false);
+            entity.Property(e => e.BrandName).HasMaxLength(50);
+            entity.Property(e => e.BrandOrigin).HasMaxLength(50);
         });
 
         modelBuilder.Entity<Category>(entity =>
@@ -62,13 +62,25 @@ public partial class LongChauStoreContext : DbContext
             entity.ToTable("Category");
 
             entity.Property(e => e.CateId)
-                .HasMaxLength(8)
+                .HasMaxLength(50)
                 .IsUnicode(false)
-                .IsFixedLength()
                 .HasColumnName("CateID");
             entity.Property(e => e.CateImg).HasMaxLength(255);
             entity.Property(e => e.CateName).HasMaxLength(50);
-            entity.Property(e => e.CateProductCount).HasDefaultValueSql("((0))");
+            entity.Property(e => e.CateProductCount).HasDefaultValue(0);
+        });
+
+        modelBuilder.Entity<ListProductImg>(entity =>
+        {
+            entity.ToTable("ListProductImg");
+
+            entity.Property(e => e.ProId)
+                .HasMaxLength(50)
+                .IsUnicode(false);
+
+            entity.HasOne(d => d.Pro).WithMany(p => p.ListProductImgs)
+                .HasForeignKey(d => d.ProId)
+                .HasConstraintName("FK_ListProductImg_Product");
         });
 
         modelBuilder.Entity<Manufacturer>(entity =>
@@ -78,13 +90,11 @@ public partial class LongChauStoreContext : DbContext
             entity.ToTable("Manufacturer");
 
             entity.Property(e => e.ManId)
-                .HasMaxLength(8)
+                .HasMaxLength(50)
                 .IsUnicode(false)
-                .IsFixedLength()
                 .HasColumnName("ManID");
-            entity.Property(e => e.ManName)
-                .HasMaxLength(20)
-                .IsUnicode(false);
+            entity.Property(e => e.ManCountry).HasMaxLength(50);
+            entity.Property(e => e.ManName).HasMaxLength(255);
         });
 
         modelBuilder.Entity<Order>(entity =>
@@ -92,9 +102,8 @@ public partial class LongChauStoreContext : DbContext
             entity.HasKey(e => e.OrderId).HasName("PK__Orders__C3905BAFCD1701B5");
 
             entity.Property(e => e.OrderId)
-                .HasMaxLength(8)
+                .HasMaxLength(50)
                 .IsUnicode(false)
-                .IsFixedLength()
                 .HasColumnName("OrderID");
             entity.Property(e => e.Address).HasMaxLength(100);
             entity.Property(e => e.PaymentMethod).HasMaxLength(8);
@@ -105,9 +114,8 @@ public partial class LongChauStoreContext : DbContext
             entity.Property(e => e.TimePay).HasColumnType("datetime");
             entity.Property(e => e.TotalPrice).HasColumnName("totalPrice");
             entity.Property(e => e.UserId)
-                .HasMaxLength(8)
+                .HasMaxLength(50)
                 .IsUnicode(false)
-                .IsFixedLength()
                 .HasColumnName("UserID");
 
             entity.HasOne(d => d.User).WithMany(p => p.Orders)
@@ -122,21 +130,18 @@ public partial class LongChauStoreContext : DbContext
             entity.ToTable("OrderDetail");
 
             entity.Property(e => e.OrderDetailId)
-                .HasMaxLength(8)
+                .HasMaxLength(50)
                 .IsUnicode(false)
-                .IsFixedLength()
                 .HasColumnName("OrderDetailID");
             entity.Property(e => e.Address).HasMaxLength(100);
             entity.Property(e => e.OrderId)
-                .HasMaxLength(8)
+                .HasMaxLength(50)
                 .IsUnicode(false)
-                .IsFixedLength()
                 .HasColumnName("OrderID");
             entity.Property(e => e.PaymentMethod).HasMaxLength(8);
             entity.Property(e => e.ProId)
-                .HasMaxLength(8)
+                .HasMaxLength(50)
                 .IsUnicode(false)
-                .IsFixedLength()
                 .HasColumnName("ProID");
 
             entity.HasOne(d => d.Order).WithMany(p => p.OrderDetails)
@@ -160,41 +165,53 @@ public partial class LongChauStoreContext : DbContext
                 });
 
             entity.Property(e => e.ProId)
-                .HasMaxLength(8)
+                .HasMaxLength(50)
                 .IsUnicode(false)
-                .IsFixedLength()
                 .HasColumnName("ProID");
             entity.Property(e => e.BrandId)
-                .HasMaxLength(8)
+                .HasMaxLength(50)
                 .IsUnicode(false)
-                .IsFixedLength()
                 .HasColumnName("BrandID");
+            entity.Property(e => e.BrandOriginId)
+                .HasMaxLength(50)
+                .IsUnicode(false)
+                .HasColumnName("BrandOriginID");
             entity.Property(e => e.CateId)
-                .HasMaxLength(8)
+                .HasMaxLength(50)
                 .IsUnicode(false)
-                .IsFixedLength()
                 .HasColumnName("CateID");
-            entity.Property(e => e.Descript).HasMaxLength(300);
-            entity.Property(e => e.ManId)
-                .HasMaxLength(8)
+            entity.Property(e => e.ManCountryId)
+                .HasMaxLength(50)
                 .IsUnicode(false)
-                .IsFixedLength()
+                .HasColumnName("ManCountryID");
+            entity.Property(e => e.ManId)
+                .HasMaxLength(50)
+                .IsUnicode(false)
                 .HasColumnName("ManID");
-            entity.Property(e => e.Origin).HasMaxLength(8);
             entity.Property(e => e.ProName).HasMaxLength(255);
             entity.Property(e => e.Rating).HasColumnName("rating");
             entity.Property(e => e.Status).HasMaxLength(8);
             entity.Property(e => e.Unit).HasMaxLength(25);
 
-            entity.HasOne(d => d.Brand).WithMany(p => p.Products)
+            entity.HasOne(d => d.Brand).WithMany(p => p.ProductBrands)
                 .HasForeignKey(d => d.BrandId)
-                .HasConstraintName("FK__Product__BrandID__534D60F1");
+                .OnDelete(DeleteBehavior.SetNull)
+                .HasConstraintName("FK_Product_BrandID_Brand_BrandID");
+
+            entity.HasOne(d => d.BrandOrigin).WithMany(p => p.ProductBrandOrigins)
+                .HasForeignKey(d => d.BrandOriginId)
+                .HasConstraintName("FK_Product_BrandOrigin_Brand_BrandID");
 
             entity.HasOne(d => d.Cate).WithMany(p => p.Products)
                 .HasForeignKey(d => d.CateId)
-                .HasConstraintName("FK__Product__CateID__52593CB8");
+                .OnDelete(DeleteBehavior.SetNull)
+                .HasConstraintName("FK_Product_Category");
 
-            entity.HasOne(d => d.Man).WithMany(p => p.Products)
+            entity.HasOne(d => d.ManCountry).WithMany(p => p.ProductManCountries)
+                .HasForeignKey(d => d.ManCountryId)
+                .HasConstraintName("FK_Product_Manufacturer");
+
+            entity.HasOne(d => d.Man).WithMany(p => p.ProductMen)
                 .HasForeignKey(d => d.ManId)
                 .HasConstraintName("FK__Product__ManID__5441852A");
         });
@@ -206,20 +223,17 @@ public partial class LongChauStoreContext : DbContext
             entity.ToTable("Rating");
 
             entity.Property(e => e.RateId)
-                .HasMaxLength(8)
+                .HasMaxLength(50)
                 .IsUnicode(false)
-                .IsFixedLength()
                 .HasColumnName("RateID");
             entity.Property(e => e.DayClose).HasColumnType("datetime");
             entity.Property(e => e.ProId)
-                .HasMaxLength(8)
+                .HasMaxLength(50)
                 .IsUnicode(false)
-                .IsFixedLength()
                 .HasColumnName("ProID");
             entity.Property(e => e.UserId)
-                .HasMaxLength(8)
+                .HasMaxLength(50)
                 .IsUnicode(false)
-                .IsFixedLength()
                 .HasColumnName("UserID");
 
             entity.HasOne(d => d.Pro).WithMany(p => p.Ratings)
@@ -236,9 +250,8 @@ public partial class LongChauStoreContext : DbContext
             entity.HasKey(e => e.UserId).HasName("PK__Users__1788CCACCEA163A0");
 
             entity.Property(e => e.UserId)
-                .HasMaxLength(8)
+                .HasMaxLength(50)
                 .IsUnicode(false)
-                .IsFixedLength()
                 .HasColumnName("UserID");
             entity.Property(e => e.Address).HasMaxLength(100);
             entity.Property(e => e.Email)
@@ -249,8 +262,7 @@ public partial class LongChauStoreContext : DbContext
                 .IsUnicode(false);
             entity.Property(e => e.Phone)
                 .HasMaxLength(10)
-                .IsUnicode(false)
-                .IsFixedLength();
+                .IsUnicode(false);
             entity.Property(e => e.Role)
                 .HasMaxLength(8)
                 .IsUnicode(false);
@@ -274,14 +286,12 @@ public partial class LongChauStoreContext : DbContext
                         j.HasKey("UserId", "ProId").HasName("PK__Cart__01A8E5F385C08520");
                         j.ToTable("Cart");
                         j.IndexerProperty<string>("UserId")
-                            .HasMaxLength(8)
+                            .HasMaxLength(50)
                             .IsUnicode(false)
-                            .IsFixedLength()
                             .HasColumnName("UserID");
                         j.IndexerProperty<string>("ProId")
-                            .HasMaxLength(8)
+                            .HasMaxLength(50)
                             .IsUnicode(false)
-                            .IsFixedLength()
                             .HasColumnName("ProID");
                     });
         });
@@ -293,15 +303,13 @@ public partial class LongChauStoreContext : DbContext
             entity.ToTable("Voucher");
 
             entity.Property(e => e.VoucherId)
-                .HasMaxLength(8)
+                .HasMaxLength(50)
                 .IsUnicode(false)
-                .IsFixedLength()
                 .HasColumnName("VoucherID");
             entity.Property(e => e.DayClose).HasColumnType("datetime");
             entity.Property(e => e.ProId)
-                .HasMaxLength(8)
+                .HasMaxLength(50)
                 .IsUnicode(false)
-                .IsFixedLength()
                 .HasColumnName("ProID");
             entity.Property(e => e.VoucherCode)
                 .HasMaxLength(8)

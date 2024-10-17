@@ -121,14 +121,16 @@
             </div>
         </div>
         <div class="row row-cols-1 row-cols-md-6 g-4 mb-3 mt-1">
-            @foreach (var product in Model.Products.Take(8))
+            @foreach (var product in Model.Products.Take(12))
             {
                 <div class="col">
                     <div class="card rounded-12">
-                        <img src="@Url.Content("~/images/ProductImages/" + product.ProImg)" class="card-img-top product-img" alt="Product Image" />
-                        <div class="card-body">
-                            <h5 class="card-title product-title font-14">@product.ProName</h5>
-                        </div>
+                        <a href="@Url.Action("ProductDetails", "Category", new { productId = product.ProId.Trim() })" class="text-decoration-none text-black">
+                            <img src="@product.ProImg" class="card-img-top product-img" alt="Product Image" />
+                            <div class="card-body">
+                                <h5 class="card-title product-title font-14">@product.ProName</h5>
+                            </div>
+                        </a>
                         <div class="px-3">
                             <div class="mb-1">
                                 <div class="font-14 text-blue">
@@ -147,6 +149,7 @@
                     </div>
                 </div>
             }
+
         </div>
     </div>
 

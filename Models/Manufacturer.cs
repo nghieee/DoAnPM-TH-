@@ -9,5 +9,9 @@ public partial class Manufacturer
 
     public string? ManName { get; set; }
 
-    public virtual ICollection<Product> Products { get; } = new List<Product>();
+    public string? ManCountry { get; set; }
+
+    public virtual ICollection<Product> ProductManCountries { get; set; } = new List<Product>();
+
+    public virtual ICollection<Product> ProductMen { get; set; } = new List<Product>();
 }

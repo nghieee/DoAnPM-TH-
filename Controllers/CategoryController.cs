@@ -1,4 +1,5 @@
-﻿using DoAnPM_TH_.Models;
+﻿using Azure.Core;
+using DoAnPM_TH_.Models;
 using DoAnPM_TH_.ViewModels;
 using Microsoft.AspNetCore.Mvc;
 
@@ -52,9 +53,43 @@ namespace DoAnPM_TH_.Controllers
             return View(viewModel);
         }
 
-        public IActionResult ProductDetails()
+        public IActionResult ProductDetails(string? productId)
         {
-            return View();
+            if (string.IsNullOrEmpty(productId))
+            {
+                return NotFound();
+            }
+
+
+            var product = _context.Products.FirstOrDefault(p => p.ProId == productId);
+            if (product == null)
+            {
+                return NotFound();
+            }
+
+            var category = _context.Categories.FirstOrDefault(c => c.CateId == product.CateId);
+            if (category == null)
+            {
+                return NotFound();
+            }
+
+            var manufacturer = _context.Manufacturers.FirstOrDefault(m => m.ManId == product.ManId);
+            if (manufacturer == null)
+            {
+                return NotFound();
+            }
+
+            var productImages = _context.ListProductImgs.Where(img => img.ProId == productId).ToList();
+
+            var viewModel = new ProductDetailModel
+            {
+                Product = product,
+                Category = category,
+                Manufacturer = manufacturer,
+                ListProductImg = productImages
+            };
+
+            return View(viewModel);
         }
     }
 }
