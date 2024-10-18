@@ -26,32 +26,29 @@ namespace DoAnPM_TH_.Controllers
             }
 
             var products = _context.Products
-                           .Where(p => p.ProName.Contains(keyword))
-                           .Select(p => new 
-                           { 
-                               p.ProId, 
-                               p.ProName, 
-                               p.Price, 
-                               p.Unit, 
-                               p.ProImg 
-                           })  
-                           .Take(4)  
-                           .ToList();
-
+                .Where(p => p.ProName.Contains(keyword))
+                .Select(p => new
+                {
+                    p.ProId,
+                    p.ProName,
+                    p.Price,
+                    p.Unit,
+                    p.ProImg
+                }).Take(4).ToList();
             return Json(products);
         }
 
-        [HttpPost]
+        [HttpGet]
         public IActionResult SearchResult(string keyword)
         {
             if (string.IsNullOrEmpty(keyword))
             {
-                return View(new List<Product>()); 
+                return View(new List<Product>());
             }
 
             var products = _context.Products.Where(p => p.ProName.Contains(keyword)).ToList();
 
-            return View(products); 
+            return View(products);
         }
 
 
@@ -59,7 +56,7 @@ namespace DoAnPM_TH_.Controllers
         {
             var categories = _context.Categories.ToList();
 
-            var products = _context.Products.ToList(); 
+            var products = _context.Products.ToList();
 
             var viewModel = new HomeViewModel
             {
@@ -75,8 +72,8 @@ namespace DoAnPM_TH_.Controllers
             return View();
         }
 
-        public IActionResult Doctor() 
-        { 
+        public IActionResult Doctor()
+        {
             return View();
         }
 
