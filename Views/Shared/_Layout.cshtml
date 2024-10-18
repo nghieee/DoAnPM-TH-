@@ -6,7 +6,6 @@
     <title>@ViewData["Title"] - DoAnPM_TH_</title>
     <link rel="stylesheet" href="~/lib/bootstrap/dist/css/bootstrap.min.css" />
     <link rel="stylesheet" href="~/css/site.css" asp-append-version="true" />
-    <link rel="stylesheet" href="~/DoAnPM_TH_.styles.css" asp-append-version="true" />
     <script src="https://kit.fontawesome.com/eaf1554704.js" crossorigin="anonymous"></script>
 </head>
 <body>
@@ -37,15 +36,14 @@
                     <a href="@Url.Action("Index", "Home")"><img src="~/images/logo_lc_default.png" /></a>
                 </div>
                 <div class="col-auto">
-                    <form action="/Home/SearchResult" method="post" id="searchForm">
+                    <form action="/Home/SearchResult" method="get" id="searchForm" onsubmit="return false;">
                         <div class="input-field position-relative">
-                            <button class="btn-search" type="submit">
+                            <button class="btn-search" type="submit" id="searchButton">
                                 <i class="fa-solid fa-magnifying-glass" style="color: #1250dc;"></i>
                             </button>
-                            <input class="search" type="text" name="keyword" id="searchInput" placeholder="Tìm tên thuốc..." oninput="searchProducts()" autocomplete="off" value="" />
-                            @* Hiển thị kết quả ở đây (xử lý js) *@
+                            <input class="search" type="text" name="keyword" id="searchInput" placeholder="Tìm tên thuốc..." autocomplete="off" value="" />
                             <div id="searchResult" class="position-absolute bg-white border mt-1" style="display:none; width: 100%; z-index: 10;">
-                                @* Kết quả tìm kiếm sẽ được hiển thị tại đây  *@
+                                @* Kết quả tìm kiếm sẽ được hiển thị tại đây *@
                             </div>
                         </div>
                     </form>
@@ -179,12 +177,12 @@
                 <div class="footer__main-connect">
                     <div>
                         <div class="font-16 fw-500 pb-2">Kết nối với chúng tôi</div>
-                        <img src="~/images/facebook_logo.png" style="width: 28px;"/>
-                        <img src="~/images/logo_zalo.png" style="width: 28px;"/>
+                        <img src="~/images/facebook_logo.png" style="width: 28px;" />
+                        <img src="~/images/logo_zalo.png" style="width: 28px;" />
                     </div>
                     <div>
                         <div class="font-16 fw-500 pb-2 mt-5">Tải ứng dụng Long Châu phake</div>
-                        <img src="~/images/qr_100x100.png"/>
+                        <img src="~/images/qr_100x100.png" />
                     </div>
                 </div>
                 <div class="footer__main-certify">
@@ -200,46 +198,48 @@
     <script src="~/js/site.js" asp-append-version="true"></script>
     @await RenderSectionAsync("Scripts", required: false)
     <script>
-        //Search-Start
         document.getElementById('searchInput').addEventListener('input', function () {
-        var keyword = this.value;
+            var keyword = this.value;
 
-        if (keyword.length > 0) {
-            fetch(`/Home/SearchAjax?keyword=${keyword}`)
-                .then(response => response.json())
-                .then(data => {
-                    var searchResult = document.getElementById('searchResult');
-                    searchResult.innerHTML = ''; // Xóa kết quả cũ
+            if (keyword.length > 0) {
+                fetch(`/Home/SearchAjax?keyword=${encodeURIComponent(keyword)}`)
+                    .then(response => response.json())
+                    .then(data => {
+                        console.log(data);
+                        var searchResult = document.getElementById('searchResult');
+                        searchResult.innerHTML = ''; // Xóa kết quả cũ
 
-                    if (data.length > 0) {
-                        data.forEach(product => {
-                            var productItem = `<div class="search-item">
-                                <a href="/Product/ProductDetails?productId=${product.ProId}">${product.ProName}</a>
+                        if (data.length > 0) {
+                            data.forEach(product => {
+                                console.log(product);
+                                var productItem = `<div class="search-item">
+                                    <a href="/Category/ProductDetails?productId=${product.ProId}">${product.ProName} - ${product.Price} ${product.Unit}</a>
+                                </div>`;
+                                searchResult.innerHTML += productItem;
+                            });
+
+                            // Thêm liên kết "Xem tất cả sản phẩm"
+                            searchResult.innerHTML += `<div class="search-item justify-content-center">
+                                <a href="/Home/SearchResult?keyword=${encodeURIComponent(keyword)}">Xem tất cả sản phẩm</a>
                             </div>`;
-                            searchResult.innerHTML += productItem;
-                        });
+                            searchResult.style.display = 'block';
+                        } else {
+                            searchResult.style.display = 'none';
+                        }
+                    });
+            } else {
+                document.getElementById('searchResult').style.display = 'none';
+            }
+        });
 
-                        searchResult.innerHTML += `<div class="search-item justify-content-center">
-                            <a href="/Home/SearchResult?keyword=${keyword}">Xem tất cả sản phẩm</a>
-                        </div>`;
-                        searchResult.style.display = 'block';
-                    } else {
-                        searchResult.style.display = 'none';
-                    }
-                });
-        } else {
-            document.getElementById('searchResult').style.display = 'none';
-        }
-    });
-
-    // Ẩn kết quả tìm kiếm khi nhấn ngoài vùng input
-    document.addEventListener('click', function (e) {
-        var searchResult = document.getElementById('searchResult');
-        if (!document.getElementById('searchInput').contains(e.target) && !searchResult.contains(e.target)) {
-            searchResult.style.display = 'none';
-        }
-    });
-    //Search-End
+        // Ẩn kết quả tìm kiếm khi nhấn ngoài vùng input
+        document.addEventListener('click', function (e) {
+            var searchResult = document.getElementById('searchResult');
+            if (!document.getElementById('searchInput').contains(e.target) && !searchResult.contains(e.target)) {
+                searchResult.style.display = 'none';
+            }
+        });
+        //Search-End
     </script>
 </body>
 </html>
