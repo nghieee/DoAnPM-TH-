@@ -21,7 +21,7 @@ public partial class Order
 
     public DateTime? TimeDelivery { get; set; }
 
-    public string? UserId { get; set; }
+    public int? UserId { get; set; }
 
     public double? TotalPrice { get; set; }
 

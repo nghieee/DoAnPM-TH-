@@ -9,6 +9,13 @@ builder.Services.AddControllersWithViews();
 builder.Services.AddDbContext<LongChauStoreContext>(options =>
     options.UseSqlServer(builder.Configuration.GetConnectionString("DefaultConnection")));
 
+// Thêm d?ch v? Session
+builder.Services.AddSession(options =>
+{
+    options.IdleTimeout = TimeSpan.FromMinutes(30); // Th?i gian h?t h?n phiên
+    options.Cookie.HttpOnly = true; // Ch? cho phép truy c?p cookie qua HTTP
+    options.Cookie.IsEssential = true; // Cookie c?n thi?t cho ?ng d?ng
+});
 
 var app = builder.Build();
 
@@ -24,6 +31,9 @@ app.UseHttpsRedirection();
 app.UseStaticFiles();
 
 app.UseRouting();
+
+// B?t middleware cho Session
+app.UseSession();
 
 app.UseAuthorization();
 

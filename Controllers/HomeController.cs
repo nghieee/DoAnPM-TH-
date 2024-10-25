@@ -1,7 +1,6 @@
 ﻿using DoAnPM_TH_.Models;
 using DoAnPM_TH_.ViewModels;
 using Microsoft.AspNetCore.Mvc;
-using Microsoft.EntityFrameworkCore;
 using System.Diagnostics;
 
 namespace DoAnPM_TH_.Controllers
@@ -65,11 +64,6 @@ namespace DoAnPM_TH_.Controllers
             };
 
             return View(viewModel);
-        }
-
-        public IActionResult Account()
-        {
-            return View();
         }
 
         public IActionResult Doctor()

@@ -51,19 +51,85 @@
                 <div class="col-auto">
                     <ul class="d-flex align-items-center">
                         <li class="login-button">
-                            <a href="@Url.Action("Account", "Home")" style="color: white;">
-                                <i class="fa-solid fa-user me-1" style="color: #ffffff;"></i>
-                                Đăng nhập
-                            </a>
+                            @if (Context.Session.GetString("username") != null)  
+                            {
+                                <div class="dropdown">
+                                    <a class="btn dropdown-toggle text-white" href="#" role="button" id="dropdownMenuLink" data-bs-toggle="dropdown" aria-expanded="false">
+                                        <i class="fa-solid fa-user me-1" style="color: #ffffff;"></i>
+                                        @Context.Session.GetString("username")
+                                    </a>
+                                    <ul class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+                                        <li><a class="dropdown-item" href="@Url.Action("Profile", "Account")">Xem thông tin</a></li>
+                                        <li><a class="dropdown-item" href="@Url.Action("Logout", "Account")">Đăng xuất</a></li>
+                                    </ul>
+                                </div>
+                            }
+                            else
+                            {
+                                <a href="@Url.Action("Index", "Account")" style="color: white;">
+                                    <i class="fa-solid fa-user me-1" style="color: #ffffff;"></i>
+                                    Đăng nhập
+                                </a>
+                            }
                         </li>
+
                         <li class="cart-button" style="color: white;">
-                            <a href="#" style="color: white;">
+                            <a href="#" id="cart-btn" style="color: white;">
                                 <i class="fa-solid fa-cart-shopping me-1" style="color: #ffffff;"></i>
                                 Giỏ hàng
                             </a>
                         </li>
                     </ul>
                 </div>
+                <div class="cart-sidebar">
+                    <div class="cart-header d-flex align-items-center justify-content-between p-3 border-bottom border-1 border-dark">
+                        <h4 class="cart-info text-black">
+                            Giỏ hàng (<span class="cart-count">0</span>)
+                        </h4>
+                        <button class="close-cart border-0 bg-white">
+                            <i class="fa-solid fa-xmark" style="font-size: 24px;"></i>
+                        </button>
+                    </div>
+                    <div class="cart-container text-center pt-3 pb-3 pe-2 ps-2">
+                        <div class="cart-empty font-12 fst-italic d-none text-black">
+                            <div>Giỏ Hàng Của Bạn Đang Trống</div>
+                        </div>
+                        <div class="cart-content">
+                            @* <div class="row-cols-1">
+                            <div class="cart-item col d-flex pt-3 pb-3 border border-1">
+                            <img src="~/img/sanpham2.png" style="width: 70px; height: 70px;" />
+                            <div class="cart-detail ps-2 text-start">
+                            <h6 class="font-serif">Sữa Rửa Mặt Hoa Cúc Kiehl's Calendula Deep Cleansing Foaming Face Wash</h6>
+                            <span class="font-12 font-serif">550ml</span>
+                            <div class="d-flex justify-content-between align-items-center">
+                            <div class="quantity">
+                            <input type="number" id="quantityInput" value="1" min="1" max="10" data-price="550000">
+                            </div>
+                            <div class="font-14 text-center fw-500">
+                            <span id="priceDisplay">550,000đ</span>
+                            </div>
+                            </div>
+                            </div>
+                            <button class="close-cart border-0 bg-white" style="height: fit-content; margin-top: -16px;">
+                            <i class="fa-solid fa-xmark" style="font-size: 12px;" aria-hidden="true"></i>
+                            </button>
+                            </div>
+                            </div> *@
+                        </div>
+                    </div>
+                    <div class="cart-footer position-absolute bottom-0 w-100 p-3 border-top border-1 border-dark">
+                        <div class="d-flex justify-content-between">
+                            <h6 class="text-black">Tạm tính</h6>
+                            <div class="d-flex" style="color: #1250dc;">
+                                <div class="total-price ps-2">0</div>
+                            </div>
+                        </div>
+                        <div>
+                            <button id="go-to-cart" onclick="window.location.href='@Url.Action("Index", "Cart")'" type="button" class="col-12 btn btn-outline-dark fw-bold rounded-0 mt-3 mb-3">ĐI TỚI GIỎ HÀNG CỦA BẠN</button>
+                        </div>
+                    </div>
+                </div>
+                <div class="cart-overlay"></div>
             </div>
         </div>
         <div class="header__navigation container">
@@ -240,6 +306,31 @@
             }
         });
         //Search-End
+
+        //Đóng mở giỏ hàng - Start
+        document.addEventListener("DOMContentLoaded", function () {
+            const cartBtn = document.getElementById('cart-btn');
+            const closeCartBtn = document.querySelector('.close-cart');
+            const cartSidebar = document.querySelector('.cart-sidebar');
+            const cartOverlay = document.querySelector('.cart-overlay');
+
+            cartBtn.addEventListener('click', function (event) {
+                event.preventDefault();
+                cartSidebar.classList.add('active');
+                cartOverlay.classList.add('active');
+            });
+
+            closeCartBtn.addEventListener('click', function () {
+                cartSidebar.classList.remove('active');
+                cartOverlay.classList.remove('active');
+            });
+
+            cartOverlay.addEventListener('click', function () {
+                cartSidebar.classList.remove('active');
+                cartOverlay.classList.remove('active');
+            });
+        });
+        //Đóng mở giỏ hàng - End
     </script>
 </body>
 </html>

@@ -1,0 +1,175 @@
+﻿@{
+}
+
+<div class="account__content container mt-4 mb-5">
+    <nav style="--bs-breadcrumb-divider: url(&#34;data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='8' height='8'%3E%3Cpath d='M2.5 0L1 1.5 3.5 4 1 6.5 2.5 8l4-4-4-4z' fill='%236c757d'/%3E%3C/svg%3E&#34;);" aria-label="breadcrumb">
+        <ol class="breadcrumb font-14">
+            <li class="breadcrumb-item"><a href="@Url.Action("Index", "Home")" class="text-black">Trang Chủ</a></li>
+            <li class="breadcrumb-item activetext-black" aria-current="page">Tài khoản</li>
+        </ol>
+    </nav>
+    <div class="container row justify-content-between">
+        <div class="login-section col-4">
+            <h2 class="fw-500">Đăng nhập</h2>
+            @if (ViewBag.LoginError != null)
+            {
+                <div class="alert alert-danger">
+                    @ViewBag.LoginError
+                </div>
+            }
+            <div class="font-12 mb-3"><span>(*) </span>Các trường bắt buộc</div>
+            <form id="loginForm" action="@Url.Action("Login", "Account")" method="post">
+                <div class="form-floating mb-3">
+                    <input type="email" class="form-control" id="floatingInput" name="Email" placeholder="name@example.com" required>
+                    <label for="floatingInput">Địa chỉ email*</label>
+                </div>
+                <div class="form-floating mb-3">
+                    <input type="password" class="form-control" id="floatingPassword" name="Password" placeholder="Password" required>
+                    <label for="floatingPassword">Mật khẩu*</label>
+                </div>
+                <div class="form-check font-12 mb-3">
+                    <input class="form-check-input" type="checkbox" name="RememberMe" id="flexCheckChecked" checked>
+                    <label class="form-check-label" for="flexCheckChecked">
+                        Ghi nhớ tôi
+                    </label>
+                </div>
+                <div class="font-12 mb-3">
+                    Trang này được bảo vệ bởi reCAPTCHA, Google
+                    <a href="https://policies.google.com/privacy" target="_blank" rel="noopener">
+                        Chính sách bảo mật
+                    </a> và
+                    <a href="https://policies.google.com/terms" target="_blank" rel="noopener">
+                        Điều khoản dịch vụ
+                    </a>.
+                </div>
+                <button type="submit" class="col-12 btn btn-outline-dark fw-bold mb-3">ĐĂNG NHẬP</button>
+            </form>
+        </div>
+
+        <div class="registration-section col-7">
+            <form action="@Url.Action("Register", "Account")" method="post">
+                <h2 class="fw-500">Tạo tài khoản</h2>
+                @if (ViewBag.RegisterError != null)
+                {
+                    <div class="alert alert-danger">
+                        @ViewBag.RegisterError
+                    </div>
+                }
+                <div class="font-12 mb-3"><span>(*) </span>Các trường bắt buộc</div>
+                <div class="d-flex flex-wrap">
+                    <div class="col-6 form-floating mb-3 pe-3">
+                        <input type="text" class="account__input form-control" id="floatingInpuUserName" name="userName" placeholder="Tên" required>
+                        <label class="account__label" for="floatingInpuUserName">Họ và tên*</label>
+                    </div>
+                    <div class="col-6 form-floating mb-3 pe-3">
+                        <input type="email" class="account__input form-control" id="floatingInputEmail" name="email" placeholder="Email" required>
+                        <label class="account__label" for="floatingInputEmail">Email*</label>
+                    </div>
+                    <div class="col-6 form-floating mb-3 pe-3 position-relative">
+                        <input type="password" class="account__input form-control" id="floatingInputPassword" name="password" placeholder="Mật khẩu" required>
+                        <label class="account__label" for="floatingInputPassword">Mật khẩu*</label>
+                        <i class="fa fa-eye position-absolute" id="togglePassword" style="color: #0000007d; right: 32px; top: 50%; transform: translateY(-50%); cursor: pointer;"></i>
+                    </div>
+
+                    <div class="col-6 form-floating mb-3 pe-3 position-relative">
+                        <input type="password" class="account__input form-control" id="floatingInputConfirmPassword" name="confirmPassword" placeholder="Xác nhận mật khẩu" required>
+                        <label class="account__label" for="floatingInputConfirmPassword">Xác nhận mật khẩu*</label>
+                        <i class="fa fa-eye position-absolute" id="toggleConfirmPassword" style="color: #0000007d; right: 32px; top: 50%; transform: translateY(-50%); cursor: pointer;"></i>
+                    </div>
+                    <div class="col-6 form-floating mb-3 pe-3">
+                        <input type="text" class="account__input form-control" id="floatingInputPhone" name="phoneNumber" placeholder="Số điện thoại" required>
+                        <label class="account__label" for="floatingInputPhone">Số điện thoại*</label>
+                    </div>
+                    <div class="col-12 font-12">
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" id="gridCheck1" required>
+                            <label class="form-check-label" for="gridCheck1">
+                                Có, tôi đồng ý nhận email của Kiehl's về các thông tin mới bao gồm ưu đãi độc quyền.
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" id="gridCheck2" required>
+                            <label class="form-check-label" for="gridCheck2">
+                                Tôi muốn tham gia Chương trình khách hàng thân thiết. Bằng cách đăng ký, bạn sẽ tự động nhận được email từ chương trình Khách hàng thân thiết.
+                                <a href="https://policies.google.com/privacy" target="_blank" rel="noopener">Chính sách bảo mật.*</a>
+                            </label>
+                        </div>
+                        <div class="form-check">
+                            <input class="form-check-input" type="checkbox" id="gridCheck3" required>
+                            <label class="form-check-label" for="gridCheck3">
+                                Tôi đồng ý <a href="https://policies.google.com/privacy" target="_blank" rel="noopener">Chính sách bảo mật.*</a>
+                            </label>
+                        </div>
+                        <div class="form-check mb-3">
+                            <input class="form-check-input" type="checkbox" id="gridCheck4" required>
+                            <label class="form-check-label" for="gridCheck4">
+                                Tôi đồng ý cho L’Oreal Việt Nam, các công ty liên kết, đại lý/đại diện và bên cung cấp dịch vụ của L’Oreal Việt Nam (tại Việt Nam và/hoặc ở bất kỳ nơi nào khác) thu thập các dữ liệu cá nhân của tôi, và cung cấp cho tôi các thông tin, tài liệu marketing về các sản phẩm, dịch vụ hoặc sự kiện của L’Oreal Việt Nam. *
+                            </label>
+                        </div>
+                        <div class="form-check mb-3">
+                            <button type="submit" id="registerButton" class="col-3 btn btn-outline-dark fw-bold">THAM GIA NGAY</button>
+                        </div>
+                    </div>
+                </div>
+            </form>
+        </div>
+
+    </div>
+</div>
+
+<script>
+    // var daySelect = document.getElementById('daySelect');
+    // for (var day = 1; day <= 30; day++) {
+    //     var dayOption = document.createElement('option');
+    //     dayOption.value = day;
+    //     dayOption.textContent = day;
+    //     daySelect.appendChild(dayOption);
+    // }
+
+    // var monthSelect = document.getElementById('monthSelect');
+    // for (var month = 1; month <= 12; month++) {
+    //     var monthOption = document.createElement('option');
+    //     monthOption.value = month;
+    //     monthOption.textContent = month;
+    //     monthSelect.appendChild(monthOption);
+    // }
+
+    // var yearSelect = document.getElementById('yearSelect');
+    // var startYear = 1950;
+    // var endYear = 2008;
+    // for (var year = startYear; year <= endYear; year++) {
+    //     var yearOption = document.createElement('option');
+    //     yearOption.value = year;
+    //     yearOption.textContent = year;
+    //     yearSelect.appendChild(yearOption);
+    // }
+
+    //ẩn-hiện mật khẩu
+    document.getElementById('togglePassword').addEventListener('click', function () {
+        const passwordInput = document.getElementById('floatingInputPassword');
+        const type = passwordInput.getAttribute('type') === 'password' ? 'text' : 'password';
+        passwordInput.setAttribute('type', type);
+        this.classList.toggle('fa-eye-slash');
+    });
+
+    document.getElementById('toggleConfirmPassword').addEventListener('click', function () {
+        const confirmPasswordInput = document.getElementById('floatingInputConfirmPassword');
+        const type = confirmPasswordInput.getAttribute('type') === 'password' ? 'text' : 'password';
+        confirmPasswordInput.setAttribute('type', type);
+        this.classList.toggle('fa-eye-slash');
+    });
+
+    //Kiểm tra check chekckbox
+    document.addEventListener("DOMContentLoaded", function () {
+        const checkboxes = document.querySelectorAll('.form-check-input');
+        const registerButton = document.getElementById('registerButton');
+
+        checkboxes.forEach(checkbox => {
+            checkbox.addEventListener('change', () => {
+                // Kiểm tra xem tất cả các checkbox đã được chọn chưa
+                const allChecked = Array.from(checkboxes).every(i => i.checked);
+                registerButton.disabled = !allChecked; // Kích hoạt hoặc vô hiệu hóa nút
+            });
+        });
+    });
+</script>

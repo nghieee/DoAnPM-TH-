@@ -98,7 +98,7 @@
             </div>
             <div class="product-info col">
                 <div class="product-details">
-                    <p class="fw-500">Thương hiệu: <span class="text-blue">Tên Thương Hiệu</span></p>
+                    <p class="fw-500">Thương hiệu: <span class="text-blue">@Model.Brand?.BrandName ?? "Chưa có thương hiệu"</span></p>
                     <h3 class="product-title font-serif fw-500 m-0">@Model.Product.ProName</h3>
                     <div class="d-flex align-items-center pt-3 pb-3">
                         <span>@Model.Product.ProId</span>
@@ -183,21 +183,32 @@
                 <div class="quantity-section d-flex align-items-center pt-4 pb-4">
                     <p class="m-0 pe-4">Chọn số lượng</p>
                     <div class="quantity-input input-group" style="width: 140px;">
-                        <button class="quantity-btn-left btn-outline-secondary border-dark border border-end-0" type="button" aria-label="Giảm số lượng" disabled>−</button>
-                        <input type="number" class="form-control text-center border-top border-bottom border-0 border-dark bg-white" id="quantity-031565" name="quantity" value="1" min="1" max="5" readonly aria-label="Số lượng">
+                        <button class="quantity-btn-left btn-outline-secondary border-dark border border-end-0" type="button" aria-label="Giảm số lượng">−</button>
+                        <input type="number" class="form-control text-center border-top border-bottom border-0 border-dark bg-white" 
+                                id="data-quantity" 
+                                name="quantity" 
+                                value="1" 
+                                min="1" 
+                                max="@Model.Product.Quantity" 
+                                readonly aria-label="Số lượng">
                         <button class="quantity-btn-right btn-outline-secondary border-dark border border-start-0" type="button" aria-label="Tăng số lượng">+</button>
                     </div>
                 </div>
                 <div class="buy-btn-section">
                     <div style="width: 375px; height: 56px">
-                        <button type="button" class="buy-btn btn bg-blue text-white add-to-cart w-100 h-100" data-name="" data-price="">THÊM VÀO GIỎ HÀNG</button>
+                        <button type="button" class="buy-btn btn bg-blue text-white add-to-cart w-100 h-100" 
+                                data-id="@Model.Product.ProId"
+                                data-name="@Model.Product.ProName"
+                                data-price="@Model.Product.Price"
+                                data-img="@Model.Product.ProImg">
+                                THÊM VÀO GIỎ HÀNG
+                        </button>
                     </div>
                 </div>
             </div>
         </div>
     </div>
 </div>
-
 
 <script>
     //Start-ProducSlider
@@ -234,4 +245,33 @@
         imageClicked(firstImage);
     }
     //End-ProductSlider
+
+    //Thêm bớt sản phẩm - Start
+    document.addEventListener('DOMContentLoaded', function () {
+        const quantityInput = document.querySelector('#data-quantity');
+        const btnDecrease = document.querySelector('.quantity-btn-left');
+        const btnIncrease = document.querySelector('.quantity-btn-right');
+
+        // Giảm số lượng
+        btnDecrease.addEventListener('click', function () {
+            let currentQuantity = parseInt(quantityInput.value);
+            const minQuantity = parseInt(quantityInput.getAttribute('min'));
+
+            if (currentQuantity > minQuantity) {
+                quantityInput.value = currentQuantity - 1;
+            }
+        });
+
+        // Tăng số lượng
+        btnIncrease.addEventListener('click', function () {
+            let currentQuantity = parseInt(quantityInput.value);
+            const maxQuantity = parseInt(quantityInput.getAttribute('max'));
+
+            if (currentQuantity < maxQuantity) {
+                quantityInput.value = currentQuantity + 1;
+            }
+        });
+    });
+    //Thêm bớt sản phẩm - End
 </script>
+<script src="~/js/addtocart.js"></script>

@@ -113,10 +113,7 @@ public partial class LongChauStoreContext : DbContext
             entity.Property(e => e.TimeOrder).HasColumnType("datetime");
             entity.Property(e => e.TimePay).HasColumnType("datetime");
             entity.Property(e => e.TotalPrice).HasColumnName("totalPrice");
-            entity.Property(e => e.UserId)
-                .HasMaxLength(50)
-                .IsUnicode(false)
-                .HasColumnName("UserID");
+            entity.Property(e => e.UserId).HasColumnName("UserID");
 
             entity.HasOne(d => d.User).WithMany(p => p.Orders)
                 .HasForeignKey(d => d.UserId)
@@ -231,10 +228,7 @@ public partial class LongChauStoreContext : DbContext
                 .HasMaxLength(50)
                 .IsUnicode(false)
                 .HasColumnName("ProID");
-            entity.Property(e => e.UserId)
-                .HasMaxLength(50)
-                .IsUnicode(false)
-                .HasColumnName("UserID");
+            entity.Property(e => e.UserId).HasColumnName("UserID");
 
             entity.HasOne(d => d.Pro).WithMany(p => p.Ratings)
                 .HasForeignKey(d => d.ProId)
@@ -249,10 +243,7 @@ public partial class LongChauStoreContext : DbContext
         {
             entity.HasKey(e => e.UserId).HasName("PK__Users__1788CCACCEA163A0");
 
-            entity.Property(e => e.UserId)
-                .HasMaxLength(50)
-                .IsUnicode(false)
-                .HasColumnName("UserID");
+            entity.Property(e => e.UserId).HasColumnName("UserID");
             entity.Property(e => e.Address).HasMaxLength(100);
             entity.Property(e => e.Email)
                 .HasMaxLength(20)
@@ -285,10 +276,7 @@ public partial class LongChauStoreContext : DbContext
                     {
                         j.HasKey("UserId", "ProId").HasName("PK__Cart__01A8E5F385C08520");
                         j.ToTable("Cart");
-                        j.IndexerProperty<string>("UserId")
-                            .HasMaxLength(50)
-                            .IsUnicode(false)
-                            .HasColumnName("UserID");
+                        j.IndexerProperty<int>("UserId").HasColumnName("UserID");
                         j.IndexerProperty<string>("ProId")
                             .HasMaxLength(50)
                             .IsUnicode(false)

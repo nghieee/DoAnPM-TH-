@@ -1,0 +1,161 @@
+﻿@{
+}
+
+<style>
+    .quantity-btn-left {
+        border-radius: 24px 0px 0px 24px;
+        width: 40px;
+    }
+
+    .quantity-btn-right {
+        border-radius: 0px 24px 24px 0px;
+        width: 40px;
+    }
+
+    .paying
+</style>
+
+<div class="container pt-5 pb-5">
+    <h2 class="font-serif pb-5">
+        Giỏ Hàng Của Bạn (<span id="cart-count">0</span>)
+    </h2>
+    <div class="paying__content row">
+        <div class="paying__content-left col-8">
+            <div class="cart-items row-cols-1">
+                @* Sản phẩm js render tại đây *@
+            </div>
+        </div>
+        <div class="paying__content-right bg-secondary bg-opacity-25 col-4 p-3">
+            <div class="d-flex justify-content-between mb-2">
+                <div class="title opacity-75 fw-500">Tạm tính</div>
+                <div class="provisional-price fw-500"></div>
+            </div>
+            <div class="d-flex justify-content-between mb-2">
+                <div class="title opacity-75 fw-500">Phí ship</div>
+                <div class="shipping-fee fw-500"></div>
+            </div>
+            <div class="content-discount bg-white p-3">
+                <div class="fw-500 font-14 mb-2">Mã khuyến mãi</div>
+                <div class="input-group d-flex">
+                    <input type="text" class="form-control rounded-0" placeholder="Nhập mã khuyến mãi của bạn" aria-describedby="button-addon2">
+                    <button class="btn btn-outline-dark rounded-0" type="button" id="button-addon2">ÁP DỤNG</button>
+                </div>
+            </div>
+            <div class="d-flex justify-content-between mt-2">
+                <div class="title opacity-75 fw-500">Tổng</div>
+                <div class="final-price fw-500"></div>
+            </div>
+            <form action="@Url.Action("...", "...")" method="get">
+                <button type="submit" class="col-12 btn btn-outline-dark fw-bold rounded-0 mt-3 mb-3">TIẾN HÀNH THANH TOÁN</button>
+            </form>
+        </div>
+    </div>
+</div>
+
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+        const cartItems = document.querySelector('.cart-items');
+        const provisionalPriceDisplay = document.querySelector('.provisional-price'); // Giá tạm tính
+        const finalPriceDisplay = document.querySelector('.final-price'); // Giá cuối (giá phải thanh toán)
+        const shippingFeeDisplay = document.querySelector('.shipping-fee');
+        const cartCountDisplay = document.querySelector('#cart-count'); // Số lượng sản phẩm
+        const shippingFee = 30000;
+        let cart = JSON.parse(localStorage.getItem('cart')) || [];
+
+        let totalPrice = 0;
+        let totalItems = 0;
+
+        // Hiển thị sản phẩm
+        cart.forEach((item, index) => {
+            const cartItem = document.createElement('div');
+            cartItem.className = 'cart-item col d-flex p-3 border-top border-1';
+            cartItem.innerHTML = `
+                <img src="${item.img}" style="width: 150px; height: 150px; padding: 12px;" />
+                <div class="cart-detail ps-2 w-100 text-start">
+                    <h4 class="font-serif w-75">${item.name}</h4>
+                    <div class="d-flex justify-content-between align-items-center">
+                        <div class="quantity input-group" style="width: 140px;">
+                            <button class="quantity-btn-left btn-outline-secondary border-dark border border-end-0" type="button" aria-label="Giảm số lượng" data-index="${index}">−</button>
+                            <input type="number" class="form-control text-center border-top border-bottom border-0 border-dark bg-white" id="quantityInput-${index}" value="${item.quantity}" min="1" max="10" data-price="${item.price}" readonly>
+                            <button class="quantity-btn-right btn-outline-secondary border-dark border border-start-0" type="button" aria-label="Tăng số lượng" data-index="${index}">+</button>
+                        </div>
+                        <div class="font-16 text-center fw-500">
+                            <span id="priceDisplay-${index}">${(item.price * item.quantity).toLocaleString('vi-VN')}đ</span>
+                        </div>
+                    </div>
+                </div>
+                <button class="close-cart border-0 bg-white" style="height: fit-content; margin-top: -16px;" data-index="${index}">
+                    <i class="fa-solid fa-xmark" style="font-size: 12px;" aria-hidden="true"></i>
+                </button>
+            `;
+
+            cartItems.appendChild(cartItem);
+
+            totalPrice += item.price * item.quantity;
+            totalItems += parseInt(item.quantity); // Tổng số lượng sản phẩm trong giỏ
+
+            // Thay đổi số lượng sản phẩm bằng nút tăng/giảm
+            document.querySelector(`.quantity-btn-left[data-index="${index}"]`).addEventListener('click', function () {
+                if (cart[index].quantity > 1) {
+                    cart[index].quantity--;
+                    updateQuantity(index);
+                }
+            });
+
+            document.querySelector(`.quantity-btn-right[data-index="${index}"]`).addEventListener('click', function () {
+                if (cart[index].quantity < 10) {
+                    cart[index].quantity++;
+                    updateQuantity(index);
+                }
+            });
+
+            // Xóa sản phẩm
+            document.querySelector(`.close-cart[data-index="${index}"]`).addEventListener('click', function () {
+                cart.splice(index, 1);
+                localStorage.setItem('cart', JSON.stringify(cart));
+                location.reload();
+            });
+        });
+
+        // Cập nhật giá
+        shippingFeeDisplay.textContent = `${shippingFee.toLocaleString('vi-VN')} đ`;
+        provisionalPriceDisplay.textContent = `${totalPrice.toLocaleString('vi-VN')} đ`;
+        finalPriceDisplay.textContent = `${(totalPrice + shippingFee).toLocaleString('vi-VN')} đ`;
+
+        cartCountDisplay.textContent = totalItems;
+
+        // Cập nhật tổng giá từng sản phẩm khi có thay đổi
+        function updateTotalPrice() {
+            let updatedTotalPrice = 0;
+            totalItems = 0;
+            cart.forEach((item) => {
+                updatedTotalPrice += item.price * item.quantity;
+                totalItems += parseInt(item.quantity);
+            });
+
+            provisionalPriceDisplay.textContent = `${updatedTotalPrice.toLocaleString('vi-VN')} đ`;
+            finalPriceDisplay.textContent = `${(updatedTotalPrice + shippingFee).toLocaleString('vi-VN')} đ`;
+
+            cartCountDisplay.textContent = totalItems;
+
+            // In ra tổng số sản phẩm sau khi cập nhật
+            console.log(`Tổng số sản phẩm trong giỏ hàng: ${totalItems}`);
+        }
+
+        // Cập nhật số lượng và giá của sản phẩm
+        function updateQuantity(index) {
+            const quantityInput = document.querySelector(`#quantityInput-${index}`);
+            const priceDisplay = document.querySelector(`#priceDisplay-${index}`);
+
+            quantityInput.value = cart[index].quantity;
+            const newTotalPrice = cart[index].price * cart[index].quantity;
+
+            priceDisplay.textContent = `${newTotalPrice.toLocaleString('vi-VN')}đ`;
+
+            // Lưu thay đổi vào localStorage và cập nhật giá tổng
+            localStorage.setItem('cart', JSON.stringify(cart));
+            updateTotalPrice();
+        }
+    });
+</script>
+

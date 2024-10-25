@@ -50,6 +50,16 @@
         border-radius: 20px;
     }
 
+    .quantity-btn-left {
+        border-radius: 24px 0px 0px 24px;
+        width: 40px;
+    }
+
+    .quantity-btn-right {
+        border-radius: 0px 24px 24px 0px;
+        width: 40px;
+    }
+
 </style>
 
 <div class="main__slider container pt-4">
@@ -142,7 +152,7 @@
                                     data-id="@product.ProId"
                                     data-name="@product.ProName"
                                     data-price="@product.Price"
-                                    data-img="@Url.Content("~/images/ProductImages/" + product.ProImg)">
+                                    data-img="@product.ProImg">
                                 Chọn mua
                             </button>
                         </div>
@@ -165,3 +175,4 @@
     </div>
 </div>
 
+<script src="~/js/addtocart.js"></script>
