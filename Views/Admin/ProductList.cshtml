@@ -1,0 +1,167 @@
+﻿@{
+    Layout = "_AdminLayout";
+}
+
+@model DoAnPM_TH_.ViewModels.PagedProductListViewModel
+
+<style>
+    a {
+        text-decoration: none !important;
+    }
+</style>
+
+<div class="content">
+    <div class="container-fluid d-flex justify-content-between align-items-center">
+        <div class="page-title">
+            <h4>Product List</h4>
+            <h6>Manage your products</h6>
+        </div>
+        <div class="btn btn-primary">
+            <a href="@Url.Action("AddProduct", "Admin")" class="text-white text-decoration-none">
+                Thêm Sản phẩm mới
+            </a>
+        </div>
+    </div>
+
+    <div class="card">
+        <div class="card-body">
+            <div class="card mb-0" id="filter_inputs">
+                <div class="card-body pb-0">
+                    <div class="row">
+                        <div class="col-lg-12 col-sm-12">
+                            <div class="row">
+                                <div class="col-lg col-sm-6 col-12">
+                                    <div class="form-group">
+                                        <select class="btn border border-primary" data-select2-id="1" tabindex="-1" aria-hidden="true">
+                                            <option data-select2-id="3">Choose Product</option>
+                                            <option>Macbook pro</option>
+                                            <option>Orange</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-lg col-sm-6 col-12">
+                                    <div class="form-group">
+                                        <select class="btn border border-primary" data-select2-id="1" tabindex="-1" aria-hidden="true">
+                                            <option data-select2-id="3">Choose Product</option>
+                                            <option>Macbook pro</option>
+                                            <option>Orange</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-lg col-sm-6 col-12">
+                                    <div class="form-group">
+                                        <select class="btn border border-primary" data-select2-id="1" tabindex="-1" aria-hidden="true">
+                                            <option data-select2-id="3">Choose Product</option>
+                                            <option>Macbook pro</option>
+                                            <option>Orange</option>
+                                        </select>
+                                    </div>
+                                </div>
+                                <div class="col-lg-1 col-sm-6 col-12">
+                                    <div class="input-group-append">
+                                        <button class="btn btn-primary" type="button">
+                                            <i class="fas fa-search fa-sm"></i>
+                                        </button>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="table-responsive">
+                <div>
+                    <table class="table">
+                        <thead>
+                            <tr role="row">
+                                <th class="sorting_asc" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" aria-sort="ascending" aria-label="
+: activate to sort column descending" style="width: 54.55px;">
+                                    <label class="checkboxs m-0">
+                                        <input type="checkbox" id="select-all">
+                                        <span class="checkmarks"></span>
+                                    </label>
+                                </th>
+                                <th class="sorting" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" aria-label="Product Name: activate to sort column ascending" style="width: 164.038px;">Product Name</th>
+                                <th class="sorting" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" aria-label="SKU: activate to sort column ascending" style="width: 47.6875px;">SKU</th>
+                                <th class="sorting" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" aria-label="Category : activate to sort column ascending" style="width: 86.9375px;">Category </th>
+                                <th class="sorting" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" aria-label="Brand: activate to sort column ascending" style="width: 61.4125px;">Brand</th>
+                                <th class="sorting" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" aria-label="price: activate to sort column ascending" style="width: 52.6125px;">Price</th>
+                                <th class="sorting" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" aria-label="Unit: activate to sort column ascending" style="width: 44.75px;">Unit</th>
+                                <th class="sorting" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" aria-label="Qty: activate to sort column ascending" style="width: 39.8625px;">Qty</th>
+                                <th class="sorting" tabindex="0" aria-controls="DataTables_Table_0" rowspan="1" colspan="1" aria-label="Action: activate to sort column ascending" style="width: 116.125px;">Action</th>
+                            </tr>
+                        </thead>
+                        <tbody>
+                            @foreach (var item in Model.Products)
+                            {
+                                <tr>
+                                    <td class="align-content-center">
+                                        <label class="checkboxs">
+                                            <input type="checkbox">
+                                            <span class="checkmarks"></span>
+                                        </label>
+                                    </td>
+                                    <td class="productimgname d-flex align-items-center">
+                                        <a href="javascript:void(0);" class="product-img pe-2">
+                                            <img src="@item.Product.ProImg" style="height: 80px;" alt="@item.Product.ProName" />
+                                        </a>
+                                        <a href="javascript:void(0);">@item.Product.ProName</a>
+                                    </td>
+                                    <td class="align-content-center">@item.Product.ProId</td>
+                                    <td class="align-content-center">@item.Category.CateName</td>
+                                    <td class="align-content-center">@item.Brand.BrandName</td>
+                                    <td class="align-content-center">@($"{item.Product.Price:N0}đ")</td>
+                                    <td class="align-content-center">@item.Product.Unit</td>
+                                    <td class="align-content-center">@item.Product.Quantity</td>
+                                    <td class="align-content-center">
+                                        <a class="me-3" href="/Admin/ProductDetails/@item.Product.ProId">
+                                            <img src="assets/img/icons/eye.svg" alt="view">
+                                        </a>
+                                        <a class="me-3" href="/Admin/EditProduct/@item.Product.ProId">
+                                            <img src="assets/img/icons/edit.svg" alt="edit">
+                                        </a>
+                                        <a class="confirm-text" href="/Admin/DeleteProduct/@item.Product.ProId">
+                                            <img src="assets/img/icons/delete.svg" alt="delete">
+                                        </a>
+                                    </td>
+                                </tr>
+                            }
+                        </tbody>
+                    </table>
+                    <div class="d-flex justify-content-between align-items-center">
+                        <div>
+                            <label>
+                                <select class="custom-select custom-select-sm form-control form-control-sm" name="pageSize" id="pageSize" onchange="location.href='?pageSize=' + this.value + '&page=1';">
+                                    @foreach (var size in new[] { 10, 25, 50, 100 })
+                                    {
+                                        if (Model.PageSize == size)
+                                        {
+                                            <option value="@size" selected="selected">@size</option>
+                                        }
+                                        else
+                                        {
+                                            <option value="@size">@size</option>
+                                        }
+                                    }
+                                </select>
+                            </label>
+                        </div>
+                        <div>
+                            <ul class="pagination">
+                                @for (int i = 1; i <= Model.TotalPages; i++)
+                                {
+                                    <li class="paginate_button page-item @(Model.CurrentPage == i ? "active" : "")">
+                                        <a href="?page=@i&pageSize=@Model.PageSize" class="page-link">@i</a>
+                                    </li>
+                                }
+                            </ul>
+                        </div>
+                        <div>@((Model.CurrentPage - 1) * Model.PageSize + 1) - @(Math.Min(Model.CurrentPage * Model.PageSize, Model.TotalItems)) of @Model.TotalItems items</div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+</div>
