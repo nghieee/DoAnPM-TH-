@@ -53,14 +53,8 @@ namespace DoAnPM_TH_.Controllers
             return View(viewModel);
         }
 
-        public IActionResult ProductDetails(string? productId)
+        public IActionResult ProductDetails(int productId)
         {
-            if (string.IsNullOrEmpty(productId))
-            {
-                return NotFound();
-            }
-
-
             var product = _context.Products.FirstOrDefault(p => p.ProId == productId);
             if (product == null)
             {

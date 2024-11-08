@@ -21,7 +21,7 @@ public partial class OrderDetail
 
     public string? OrderId { get; set; }
 
-    public string? ProId { get; set; }
+    public int? ProId { get; set; }
 
     public virtual Order? Order { get; set; }
 

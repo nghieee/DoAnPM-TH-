@@ -1,0 +1,177 @@
+﻿@{
+    Layout = "_AdminLayout";
+}
+@model DoAnPM_TH_.ViewModels.AdminAddProductViewModel
+
+<style>
+    .image-upload {
+        border: 1px solid rgba(145, 158, 171, .32);
+        position: relative;
+        margin-bottom: 35px;
+        border-radius: 5px;
+    }
+
+        .image-upload input[type=file] {
+            width: 100%;
+            opacity: 0;
+            height: 100px;
+            position: relative;
+            z-index: 9;
+            cursor: pointer;
+        }
+
+        .image-upload .image-uploads {
+            text-align: center;
+            width: 100%;
+            padding: 20px 0;
+            border-radius: 5px;
+            position: absolute;
+            top: 0;
+        }
+
+</style>
+
+<div class="content">
+    <div class="container-fluid">
+        <div>
+            <h4>Thêm Sản Phẩm</h4>
+        </div>
+    </div>
+
+    <form asp-action="AddProduct" method="post" enctype="multipart/form-data">
+        <div class="card">
+            <div class="card-body">
+                <div class="row">
+                    <div class="col-lg-3 col-sm-6 col-12">
+                        <div class="form-group">
+                            <label>Tên Sản Phẩm</label>
+                            <input type="text" asp-for="ProName" class="border-primary form-control" required>
+                            <span asp-validation-for="ProName" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-sm-6 col-12">
+                        <div class="form-group">
+                            <label class="d-block">Danh Mục</label>
+                            <select asp-for="CateId" class="btn border border-primary text-start w-100" required>
+                                <option value="">Chọn Danh Mục</option>
+                                @if (ViewBag.Categories != null && ViewBag.Categories.Count > 0) // Sửa ở đây
+                                {
+                                    foreach (var category in ViewBag.Categories)
+                                    {
+                                        <option value="@category.CateId">@category.CateName</option>
+                                    }
+                                }
+                                else
+                                {
+                                    <option value="">No categories available</option>
+                                }
+                            </select>
+                            <span asp-validation-for="CateId" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-sm-6 col-12">
+                        <div class="form-group">
+                            <label class="d-block">Nhà Sản Xuất</label>
+                            <select asp-for="ManId" class="btn border border-primary text-start w-100" required>
+                                <option value="">Chọn Nhà Sản Xuất</option>
+                                @if (ViewBag.Manufacturer != null && ViewBag.Manufacturer.Count > 0) // Sửa ở đây
+                                {
+                                    foreach (var man in ViewBag.Manufacturer)
+                                    {
+                                        <option value="@man.ManId">@man.ManName</option>
+                                    }
+                                }
+                                else
+                                {
+                                    <option value="">Không có Nhà Sản Xuất nào</option>
+                                }
+                            </select>
+                            <span asp-validation-for="ManId" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-sm-6 col-12">
+                        <div class="form-group">
+                            <label class="d-block">Thương Hiệu</label>
+                            <select asp-for="BrandId" class="btn border border-primary text-start w-100" required>
+                                <option value="">Chọn Thương Hiệu</option>
+                                @if (ViewBag.Brands != null && ViewBag.Brands.Count > 0) // Sửa ở đây
+                                {
+                                    foreach (var brand in ViewBag.Brands)
+                                    {
+                                        <option value="@brand.BrandId">@brand.BrandName</option>
+                                    }
+                                }
+                                else
+                                {
+                                    <option value="">Không có Thương Hiệu nào</option>
+                                }
+                            </select>
+                            <span asp-validation-for="BrandId" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-sm-6 col-12">
+                        <div class="form-group">
+                            <label>Đơn vị</label>
+                            <input type="text" asp-for="Unit" class="border-primary form-control" required>
+                            <span asp-validation-for="Unit" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-sm-6 col-12">
+                        <div class="form-group">
+                            <label>Số lượng</label>
+                            <input type="number" asp-for="Quantity" class="border-primary form-control" required>
+                            <span asp-validation-for="Quantity" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="col-lg-3 col-sm-6 col-12">
+                        <div class="form-group">
+                            <label>Đơn giá</label>
+                            <div class="d-flex">
+                                <input type="text" asp-for="Price" class="border-primary form-control" required>
+                                <span class="input-group-text" id="basic-addon1">đ</span>
+                            </div>
+                            <span asp-validation-for="Price" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="col-lg-12">
+                        <div class="form-group">
+                            <label>Hỗ trợ</label>
+                            <textarea asp-for="Support" class="form-control" required></textarea>
+                            <span asp-validation-for="Support" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="col-lg-12">
+                        <div class="form-group">
+                            <label>Thành phần</label>
+                            <textarea asp-for="Ingredient" class="form-control" required></textarea>
+                            <span asp-validation-for="Ingredient" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="col-lg-12">
+                        <div class="form-group">
+                            <label>Mô tả</label>
+                            <textarea asp-for="Descript" class="form-control" required></textarea>
+                            <span asp-validation-for="Descript" class="text-danger"></span>
+                        </div>
+                    </div>
+                    <div class="col-lg-12">
+                        <div class="form-group">
+                            <label>Ảnh Sản Phẩm</label>
+                            <div class="image-upload">
+                                <input type="file" name="proImg" required>
+                                <div class="image-uploads">
+                                    <img src="assets/img/icons/upload.svg" alt="img">
+                                    <h4>Drag and drop a file to upload</h4>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="col-lg-12">
+                        <button type="submit" class="btn btn-primary me-2">Submit</button>
+                        <a href="@Url.Action("ProductList", "Product")" class="btn btn-cancel">Cancel</a>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </form>
+</div>

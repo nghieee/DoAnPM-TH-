@@ -135,7 +135,7 @@
             {
                 <div class="col">
                     <div class="card rounded-12">
-                        <a href="@Url.Action("ProductDetails", "Category", new { productId = product.ProId.Trim() })" class="text-decoration-none text-black">
+                        <a href="@Url.Action("ProductDetails", "Category", new { productId = product.ProId })" class="text-decoration-none text-black">
                             <img src="@product.ProImg" class="card-img-top product-img" alt="Product Image" />
                             <div class="card-body">
                                 <h5 class="card-title product-title font-14">@product.ProName</h5>

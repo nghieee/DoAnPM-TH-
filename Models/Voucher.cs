@@ -13,7 +13,7 @@ public partial class Voucher
 
     public int? PercentSale { get; set; }
 
-    public string? ProId { get; set; }
+    public int? ProId { get; set; }
 
     public virtual Product? Pro { get; set; }
 }

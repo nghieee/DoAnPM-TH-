@@ -5,7 +5,7 @@ namespace DoAnPM_TH_.Models;
 
 public partial class Product
 {
-    public string ProId { get; set; } = null!;
+    public int ProId { get; set; }
 
     public string? ProName { get; set; }
 

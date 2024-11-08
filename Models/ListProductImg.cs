@@ -7,7 +7,7 @@ public partial class ListProductImg
 {
     public int Id { get; set; }
 
-    public string? ProId { get; set; }
+    public int? ProId { get; set; }
 
     public string? ImgUrl { get; set; }
 
