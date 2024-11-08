@@ -28,11 +28,6 @@ builder.Services.AddSession(options =>
     options.Cookie.IsEssential = true; // Cookie c?n thi?t cho ?ng d?ng
 });
 
-// Cấu hình Email
-builder.Services.AddTransient<IEmailSender, SendGridEmailSender>();
-
-builder.Services.Configure<SendGridOptions>(builder.Configuration.GetSection("SendGrid"));
-
 var app = builder.Build();
 
 // Configure the HTTP request pipeline.
